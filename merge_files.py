@@ -1,12 +1,17 @@
 import sys
 import os
+import glob
 
-path = 'SubwayData/'
-file_list = os.listdir(path)
+path = 'datasets/'
+file_list = glob.glob(path + 'turnstile_20*.txt')
 
 if __name__ == "__main__":
-    with open(sys.argv[1],'w') as outfile:
-    	for name in sorted(file_list):
-    		with open(path+name) as infile:
-    			outfile.write(infile.read())
-    		outfile.write("\n")
+	# add relative path
+    this_path = os.path.abspath(os.path.dirname(__file__))
+    out_path = os.path.join(this_path, sys.argv[1])
+
+    with open(out_path,'w') as outfile:
+        for name in sorted(file_list):
+            with open(name) as infile:
+                outfile.write(infile.read())
+            outfile.write("\n")
