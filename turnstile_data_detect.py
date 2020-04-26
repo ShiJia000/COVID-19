@@ -20,12 +20,16 @@ distinct_station = spark.sql("SELECT STATION, COUNT(1) AS num FROM turnstile GRO
 distinct_station.coalesce(1).rdd.map(lambda x: x[0] + ',' + str(x[1])).saveAsTextFile("distinct-station.out")
 
 # Distinct Date & Time
-distinct_date = spark.sql("SELECT DISCINCT(`date`) FROM turnstile GROUP BY `date` ORDER BY `date`")
+distinct_date = spark.sql("SELECT DISTINCT(`date`) FROM turnstile GROUP BY `date` ORDER BY `date`")
 distinct_date.coalesce(1).rdd.map(lambda x: x[0]).saveAsTextFile("distinct-date.out")
 
 # Distinct Time
-distinct_time= spark.sql("SELECT DISCINCT(`time`) FROM turnstile GROUP BY `time` ORDER BY `time`")
+distinct_time = spark.sql("SELECT DISTINCT(`time`) FROM turnstile GROUP BY `time` ORDER BY `time`")
 distinct_time.coalesce(1).rdd.map(lambda x: x[0]).saveAsTextFile("distinct-time.out")
+
+# key collision
+# distinct_key = spark.sql("SELECT DISTINCT(`time`) FROM turnstile GROUP BY `time` ORDER BY `time`")
+# distinct_time.coalesce(1).rdd.map(lambda x: x[0]).saveAsTextFile("distinct-time.out")
 
 # Find the date cannot be ordered, format the data to 'YYYY-MM-DD'
 
