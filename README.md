@@ -16,10 +16,10 @@ http://web.mta.info/developers/data/nyct/subway/Stations.csv
 
 input: argv[0]: merge_files.py, argv[1]: turnstile.txt
 
-output: output file in txt
+output: turnstile.txt
 
 ### convert_data_from_txt_to_csv.py
 
 input: argv[0]: convert_data_from_txt_to_csv.py, argv[1]: turnstile.txt, argv[2]: turnstile.csv
 
-output: output file in csv
+output: turnstile.csv
