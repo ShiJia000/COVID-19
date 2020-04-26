@@ -1,6 +1,6 @@
 # COVID-19
 
-## dataset
+## Datasets
 
 NY MTA
 http://web.mta.info/developers/turnstile.html
