@@ -11,6 +11,9 @@ http://web.mta.info/developers/resources/nyct/turnstile/ts_Field_Description.txt
 MTA Stations to County:
 http://web.mta.info/developers/data/nyct/subway/Stations.csv
 
+### HDFS Datasets:
+Turnstile: /user/js11182/turnstile.csv
+
 ## Run Book
 ### merge_files.py
 ```
