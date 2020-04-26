@@ -40,10 +40,10 @@ turnstile.createOrReplaceTempView("turnstile")
 
 
 # key collision
-distinct_key = spark.sql("SELECT `DATE`, `TIME`, `STATION`, `C/A`, `UNIT`, `SCP`, `DIVISION`, COUNT(1) AS collision_count \
+distinct_key = spark.sql("SELECT COUNT(1) AS collision_count, `DATE`, `TIME`, `STATION`, `C/A`, `UNIT`, `SCP`, `DIVISION`\
 							FROM turnstile \
-							GROUP BY `C/A`, `UNIT`, `SCP`, `STATION`, `DIVISION`, `DATE`, `TIME` \
-							ORDER BY `collision_count`, `DATE`, `TIME`, `STATION`, `C/A`, `UNIT`, `SCP`, `DIVISION`")
+							GROUP BY `UNIT`, `SCP`, `STATION`, `DIVISION`, `DATE`, `TIME` \
+							ORDER BY `collision_count`, `DATE`, `TIME`, `STATION`, `UNIT`, `SCP`, `DIVISION`")
 # `C/A`,`UNIT`, `SCP`, `STATION`, `LINENAME`, `DIVISION`, `DATE`, `TIME`
 distinct_key.coalesce(1).rdd.map(lambda x: ','.join(x[0:7]) + ',' + str(x[7])).saveAsTextFile("distinct-key.out")
 
