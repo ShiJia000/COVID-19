@@ -9,13 +9,14 @@ spark = SparkSession.builder.appName("covid").config("spark.some.config.option",
 
 # Load Data
 turnstile = spark.read.format('csv').options(header = 'true', inferschema = 'true').load(sys.argv[1])
-
+turnstile.createOrReplaceTempView("turnstile")
 
 # Detect
 
 # Distinct stations
-turnstile.createOrReplaceTempView("turnstile")
 distinct_station = spark.sql("SELECT STATION, COUNT(1) AS num FROM turnstile GROUP BY station ORDER BY STATION")
-
 distinct_station.coalesce(1).rdd.map(lambda x: ','.join(x)).saveAsTextFile("distinct-station.out")
 
+# Distinct Date
+distinct_date = spark.sql("SELECT DISTINCT(`date`) FROM turnstile ORDER BY `date`")
+distinct_date.coalesce(1).rdd.map(lambda x: ','.join(x)).saveAsTextFile("distinct-date.out")
