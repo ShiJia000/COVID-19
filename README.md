@@ -2,7 +2,7 @@
 
 ## Datasets
 
-NY MTA
+NYC MTA
 http://web.mta.info/developers/turnstile.html
 
 MTA Field Description:
@@ -12,29 +12,35 @@ MTA Stations to County:
 http://web.mta.info/developers/data/nyct/subway/Stations.csv
 
 ### HDFS Datasets:
-Turnstile: /user/js11182/turnstile.csv 
 
-Station and borough: /user/xj710/station_borough.out
+Turnstile: `/user/js11182/turnstile.csv `
+
+Station Borough: `/user/xj710/stations.csv`
 
 ## Run Book
-### merge_files.py
+
+### Data Wrangling 
+
+#### merge_files.py
 ```
 python3 merge_files.py datasets/turnstile.txt
 ```
 
-### convert_data_from_txt_to_csv.py
+#### convert_data_from_txt_to_csv.py
 ```
 python3 convert_data_from_txt_to_csv.py datasets/turnstile.txt datasets/turnstile.csv
 ```
 
 
-### spark
+### Data Detect
+
+#### python & spark version
 ```
 module load python/gnu/3.6.5
 module load spark/2.4.0 
 ```
 
-### detect data issues of turnstile
+#### detect data issues of turnstile
 
 ```
 spark-submit --conf \
@@ -43,45 +49,61 @@ spark.pyspark.python=/share/apps/python/3.6.5/bin/python \
 /user/js11182/turnstile.csv
 ```
 
-### clean the violations in turnstile data
+### Data Cleaning 
+
+#### clean the violations in turnstile data
 ```
 spark-submit --conf \
 spark.pyspark.python=/share/apps/python/3.6.5/bin/python \
 /home/js11182/COVID-19/turnstile_violation_clean.py \
 /user/js11182/turnstile.csv
+
+hfs -getmerge turnstile_violation_clean.out turnstile_violation_clean.out
+hfs -rm -r turnstile_violation_clean.out
+hfs -put turnstile_violation_clean.out
 ```
 
-### extract the useful data in turnstile
+#### extract the useful data in turnstile
 ```
 spark-submit --conf \
 spark.pyspark.python=/share/apps/python/3.6.5/bin/python \
 /home/js11182/COVID-19/turnstile_extraction.py \
 /user/js11182/turnstile_violation_clean.out
-```
 
-### station clean in turnstile
-```
 hfs -getmerge turnstile_extraction.out turnstile_extraction.out
 hfs -rm -r turnstile_extraction.out
 hfs -put turnstile_extraction.out
+```
 
+#### station clean in turnstile
+```
 spark-submit --conf \
 spark.pyspark.python=/share/apps/python/3.6.5/bin/python \
 /home/js11182/COVID-19/turnstile_station_clean.py \
 /user/js11182/turnstile_extraction.out
-```
 
-
-
-### join turnstile data && station borough data
-```
 hfs -getmerge turnstile_station_clean.out turnstile_station_clean.out
 hfs -rm -r turnstile_station_clean.out
 hfs -put turnstile_station_clean.out
+```
 
+#### station borough clean
+```
 spark-submit --conf \
 spark.pyspark.python=/share/apps/python/3.6.5/bin/python \
-/home/js11182/COVID-19/join_data.py \
-/user/xj710/station_borough.out \
+/home/js11182/COVID-19/station_borough_clean.py \
+/user/xj710/station_borough.csv
+
+hfs -getmerge station_borough_clean.out station_borough_clean.out
+hfs rm -r station_borough_clean.out
+hfs -put station_borough_clean.out
+```
+
+### join turnstile data && station borough data
+```
+spark-submit --conf \
+spark.pyspark.python=/share/apps/python/3.6.5/bin/python \
+/home/js11182/COVID-19/turnstile_borough_join.py \
+/user/js11182/station_borough_clean.out \
 /user/js11182/turnstile_station_clean.out
 ```

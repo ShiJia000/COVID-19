@@ -31,5 +31,5 @@ if __name__ == "__main__":
 
 	sort_output = output.map(sortOutput)
 
-	sort_output.saveAsTextFile('all_subway.out')
+	sort_output.saveAsTextFile('turnstile_borough_join.out')
 	sc.stop()
