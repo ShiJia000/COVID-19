@@ -19,6 +19,8 @@ Station Borough: `/user/xj710/stations.csv`
 
 ## Run Book
 
+Go to the COVID-19/ path
+
 ### Data Wrangling 
 
 #### merge_files.py
@@ -40,22 +42,22 @@ module load python/gnu/3.6.5
 module load spark/2.4.0 
 ```
 
-#### detect data issues of turnstile
+#### Detect data issues of turnstile
 
 ```
 spark-submit --conf \
 spark.pyspark.python=/share/apps/python/3.6.5/bin/python \
-/home/js11182/COVID-19/turnstile_data_detect.py \
+turnstile_data_detect.py \
 /user/js11182/turnstile.csv
 ```
 
 ### Data Cleaning 
 
-#### clean the violations in turnstile data
+#### Clean the violations in turnstile data
 ```
 spark-submit --conf \
 spark.pyspark.python=/share/apps/python/3.6.5/bin/python \
-/home/js11182/COVID-19/turnstile_violation_clean.py \
+turnstile_violation_clean.py \
 /user/js11182/turnstile.csv
 
 hfs -getmerge turnstile_violation_clean.out turnstile_violation_clean.out
@@ -63,11 +65,11 @@ hfs -rm -r turnstile_violation_clean.out
 hfs -put turnstile_violation_clean.out
 ```
 
-#### extract the useful data in turnstile
+#### Extract the useful data in turnstile
 ```
 spark-submit --conf \
 spark.pyspark.python=/share/apps/python/3.6.5/bin/python \
-/home/js11182/COVID-19/turnstile_extraction.py \
+turnstile_extraction.py \
 /user/js11182/turnstile_violation_clean.out
 
 hfs -getmerge turnstile_extraction.out turnstile_extraction.out
@@ -75,11 +77,11 @@ hfs -rm -r turnstile_extraction.out
 hfs -put turnstile_extraction.out
 ```
 
-#### station clean in turnstile
+#### Station clean in turnstile
 ```
 spark-submit --conf \
 spark.pyspark.python=/share/apps/python/3.6.5/bin/python \
-/home/js11182/COVID-19/turnstile_station_clean.py \
+turnstile_station_clean.py \
 /user/js11182/turnstile_extraction.out
 
 hfs -getmerge turnstile_station_clean.out turnstile_station_clean.out
@@ -87,11 +89,11 @@ hfs -rm -r turnstile_station_clean.out
 hfs -put turnstile_station_clean.out
 ```
 
-#### station borough clean
+#### Station borough clean
 ```
 spark-submit --conf \
 spark.pyspark.python=/share/apps/python/3.6.5/bin/python \
-/home/js11182/COVID-19/station_borough_clean.py \
+station_borough_clean.py \
 /user/xj710/station_borough.csv
 
 hfs -getmerge station_borough_clean.out station_borough_clean.out
@@ -99,11 +101,11 @@ hfs rm -r station_borough_clean.out
 hfs -put station_borough_clean.out
 ```
 
-### join turnstile data && station borough data
+### Join turnstile data && station borough data
 ```
 spark-submit --conf \
 spark.pyspark.python=/share/apps/python/3.6.5/bin/python \
-/home/js11182/COVID-19/turnstile_borough_join.py \
+turnstile_borough_join.py \
 /user/js11182/station_borough_clean.out \
 /user/js11182/turnstile_station_clean.out
 ```
