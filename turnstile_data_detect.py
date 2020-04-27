@@ -3,8 +3,6 @@ from pyspark.sql import SparkSession
 from pyspark.sql.functions import *
 from pyspark import SparkContext
 
-
-
 # read data
 sc = SparkContext()
 spark = SparkSession.builder.appName("covid").config("spark.some.config.option", "some-value").getOrCreate()
@@ -13,45 +11,50 @@ spark = SparkSession.builder.appName("covid").config("spark.some.config.option",
 turnstile = spark.read.format('csv').options(header = 'true', inferschema = 'true').load(sys.argv[1])
 turnstile.createOrReplaceTempView("turnstile")
 
-# Detect
+###############
+# Data Detect #
+###############
+
+
+# ENTRIES find min and max value
+entries_min = spark.sql("SELECT `ENTRIES` FROM turnstile ORDER BY `ENTRIES` LIMIT 10")
+entries_min.coalesce(1).rdd.map(lambda x: x[0]).saveAsTextFile("entries-min.out")
+
+entries_max = spark.sql("SELECT `ENTRIES` FROM turnstile ORDER BY `ENTRIES` DESC LIMIT 10")
+entries_max.coalesce(1).rdd.map(lambda x: x[0]).saveAsTextFile("entries-max.out")
+
+# EXITS find min and max value
+exits_min = spark.sql("SELECT `EXITS` FROM turnstile ORDER BY `EXITS` LIMIT 10")
+exits_min.coalesce(1).rdd.map(lambda x: x[0]).saveAsTextFile("exits-min.out")
+
+exits_max = spark.sql("SELECT `EXITS` FROM turnstile ORDER BY `EXITS` DESC LIMIT 10")
+exits_max.coalesce(1).rdd.map(lambda x: x[0]).saveAsTextFile("exits-max.out")
 
 # Distinct
 
-# # Distinct stations
-# distinct_station = spark.sql("SELECT STATION, COUNT(1) AS num FROM turnstile GROUP BY station ORDER BY STATION")
-# distinct_station.coalesce(1).rdd.map(lambda x: x[0] + ',' + str(x[1])).saveAsTextFile("distinct-station.out")
+# Distinct stations Check
+distinct_station = spark.sql("SELECT STATION, COUNT(1) AS num FROM turnstile GROUP BY station ORDER BY STATION")
+distinct_station.coalesce(1).rdd.map(lambda x: x[0] + ',' + str(x[1])).saveAsTextFile("distinct-station.out")
 
-# # Distinct Date & Time
-# distinct_date = spark.sql("SELECT DISTINCT(`date`) FROM turnstile GROUP BY `date` ORDER BY `date`")
-# distinct_date.coalesce(1).rdd.map(lambda x: x[0]).saveAsTextFile("distinct-date.out")
+# Distinct Date Check
+distinct_date = spark.sql("SELECT DISTINCT(`date`) FROM turnstile GROUP BY `date` ORDER BY `date`")
+distinct_date.coalesce(1).rdd.map(lambda x: x[0]).saveAsTextFile("distinct-date.out")
 
-# # Distinct Time
-# distinct_time = spark.sql("SELECT DISTINCT(`time`) FROM turnstile GROUP BY `time` ORDER BY `time`")
-# distinct_time.coalesce(1).rdd.map(lambda x: x[0]).saveAsTextFile("distinct-time.out")
+# Distinct Time Check
+distinct_time = spark.sql("SELECT DISTINCT(`time`) FROM turnstile GROUP BY `time` ORDER BY `time`")
+distinct_time.coalesce(1).rdd.map(lambda x: x[0]).saveAsTextFile("distinct-time.out")
 
-# # Distinct DESC
-# distinct_desc = spark.sql("SELECT DISTINCT(`DESC`) FROM turnstile GROUP BY `DESC` ORDER BY `DESC`")
-# distinct_desc.coalesce(1).rdd.map(lambda x: x[0]).saveAsTextFile("distinct-desc.out")
+# Distinct DESC Check
+distinct_desc = spark.sql("SELECT DISTINCT(`DESC`) FROM turnstile GROUP BY `DESC` ORDER BY `DESC`")
+distinct_desc.coalesce(1).rdd.map(lambda x: x[0]).saveAsTextFile("distinct-desc.out")
 
-# # Distinct DIVISION
-# distinct_division = spark.sql("SELECT DISTINCT(`DIVISION`) FROM turnstile GROUP BY `DIVISION` ORDER BY `DIVISION`")
-# distinct_division.coalesce(1).rdd.map(lambda x: x[0]).saveAsTextFile("distinct-division.out")
-
-
+# Distinct DIVISION Check
+distinct_division = spark.sql("SELECT DISTINCT(`DIVISION`) FROM turnstile GROUP BY `DIVISION` ORDER BY `DIVISION`")
+distinct_division.coalesce(1).rdd.map(lambda x: x[0]).saveAsTextFile("distinct-division.out")
 
 # key collision
-distinct_key = spark.sql("SELECT COUNT(1) AS collision_count, `DATE`, `TIME`, `STATION`, `C/A`, `UNIT`, `SCP`, `DIVISION`\
+distinct_key = spark.sql("SELECT COUNT(1) AS collision_count , `UNIT`, `STATION`, `SCP`, `DATE`, `TIME` \
 							FROM turnstile \
-							GROUP BY `UNIT`, `SCP`, `STATION`, `DIVISION`, `DATE`, `TIME` \
-							ORDER BY `collision_count`, `DATE`, `TIME`, `STATION`, `UNIT`, `SCP`, `DIVISION`")
-# `C/A`,`UNIT`, `SCP`, `STATION`, `LINENAME`, `DIVISION`, `DATE`, `TIME`
-distinct_key.coalesce(1).rdd.map(lambda x: ','.join(x[0:7]) + ',' + str(x[7])).saveAsTextFile("distinct-key.out")
-
-# Find the date cannot be ordered, format the data to 'YYYY-MM-DD'
-
-# Find that they did not upload the data in same time.
-
-
-# Data Clean
-
-# Remove the data of 2019
+							GROUP BY `UNIT`, `STATION`, `SCP`, `DATE`, `TIME` \
+							HAVING collision_count > 1")
+distinct_key.coalesce(1).rdd.map(lambda x: str(x[0]) + ',' + ','.join(x[1:6])).saveAsTextFile("distinct-key.out")
