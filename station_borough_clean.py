@@ -71,4 +71,4 @@ output = output.map(lambda x: ((x[0], x[1][0]), x[1][1])).reduceByKey(reduceadd)
 
 output = output.map(lambda x:((x[0][0], x[0][1]), deletetap(x[1]))).sortByKey()
 
-output.map(lambda x: ','.join(x[0]) + ',' + x[1]).saveAsTextFile("station_borough.out")
+output.map(lambda x: ','.join(x[0]) + ',' + x[1]).saveAsTextFile("station_borough_clean.out")

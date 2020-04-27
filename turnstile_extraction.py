@@ -6,24 +6,31 @@ from pyspark import SparkContext
 from csv import reader
 
 sc = SparkContext()
-spark = SparkSession.builder.appName("t1").getOrCreate()
+spark = SparkSession.builder.appName("covid").getOrCreate()
 
-Subway = spark.read.format('csv').options(header='true',inferschema='true').load(sys.argv[1])
+Subway = spark.read.format('csv').options(header='false',inferschema='true').load(sys.argv[1])
 Subway.createOrReplaceTempView("Subway")
 
-data = spark.sql("SELECT s.`TIME`, s.`UNIT`, s.`SCP`, s.`STATION`, s.`LINENAME`, s.`DATE`, s.`ENTRIES`, s.`EXITS` \
+data = spark.sql("SELECT s._c5, s._c0, s._c1, s._c2, s._c3, s._c4, s._c7, s._c8 \
 				FROM Subway s, \
-					(SELECT Min(`TIME`) as ti, `UNIT`, `SCP`, `STATION`, `LINENAME`, `DATE` \
+					(SELECT Min(_c5) as ti, _c0, _c1, _c2, _c3, _c4 \
 					FROM Subway \
-					GROUP BY `UNIT`, `SCP`, `STATION`, `LINENAME`, `DATE`) as temp \
-				WHERE s.`TIME` = temp.ti \
-				AND temp.`UNIT` = s.`UNIT` \
-				AND temp.`SCP` = s.`SCP` \
-				AND temp.`STATION` = s.`STATION` \
-				AND temp.`LINENAME` = s.`LINENAME` \
-				AND temp.`DATE` = s.`DATE` \
-				ORDER BY s.`UNIT`, s.`SCP`, s.`STATION`, s.`LINENAME`, s.`DATE`, s.`TIME`")
+					GROUP BY _c0, _c1, _c2, _c3, _c4) as temp \
+				WHERE s._c5 = temp.ti \
+				AND temp._c0 = s._c0 \
+				AND temp._c1 = s._c1 \
+				AND temp._c2 = s._c2 \
+				AND temp._c3 = s._c3 \
+				AND temp._c4 = s._c4 \
+				ORDER BY s._c0, s._c1, s._c2, s._c3, s._c4, s._c5")
 
-data.select(format_string("%s,%s,%s,%s,%s,%s,%s,%s",data["s.`UNIT`"],data["s.`SCP`"],data["s.`STATION`"], \
-		data["s.`LINENAME`"],data["s.`DATE`"],data["s.`TIME`"],data["s.`ENTRIES`"], data["s.`EXITS`"])) \
-		.write.save("subway_data_sql.out",format="text")
+data.select(format_string("%s,%s,%s,%s,%s,%s,%s,%s", \
+				data["s._c0"], \
+				data["s._c1"], \
+				data["s._c2"], \
+				data["s._c3"], \
+				data["s._c4"], \
+				data["s._c5"], \
+				data["s._c7"], \
+				data["s._C8"])) \
+		.write.save("turnstile_extraction.out", format="text")
