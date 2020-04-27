@@ -1,6 +1,6 @@
 # COVID-19
 
-Detailed description of our project and data clean part are in <b>Data_Cleaning.pdf</b>. Please read it!!!
+Detailed description of our project and data clean part are in <b>[Data_Cleaning.pdf](https://github.com/ShiJia000/COVID-19/blob/master/Data_Cleaning.pdf)</b>. Please read it!!!
 
 ## Datasets
 
