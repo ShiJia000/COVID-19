@@ -14,6 +14,13 @@ def sortline(value):
     result = ''.join(l)
     return result
 
+def date_transform(value):
+    value = str(value)
+    months = value[0:2]
+    dates = value[3:5]
+    years = value[6:10]
+    return years + '-' + months + '-' + dates
+
 def rm_control(str):
     return "".join(ch for ch in str if unicodedata.category(ch)[0]!="C")
 
@@ -39,7 +46,7 @@ def ngram_fingerprint(value, n = 2):
     result = ""
     for item in listx:
         result += item
-    return (value[0], (value[1], value[2], value[3], result, sortline(value[5]), value[6], value[7], value[8], value[9], value[10], value[11]))
+    return (value[0], (value[1], value[2], value[3], result, sortline(value[5]), value[6], date_transform(value[7]), value[8], value[9], value[10], value[11]))
 
 output = rdd.map(ngram_fingerprint)
 
