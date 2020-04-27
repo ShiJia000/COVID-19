@@ -14,7 +14,12 @@ http://web.mta.info/developers/data/nyct/subway/Stations.csv
 ### HDFS Datasets:
 Turnstile: /user/js11182/turnstile.csv 
 
+Turnstile clean: /user/hz2204/subway_data_sql.out
+
 Station and borough: /user/xj710/station_borough.out
+
+Turnstile station clean and sort line: /user/xj710/turnstile_station_clean.out
+
 
 ## Run Book
 ### merge_files.py
