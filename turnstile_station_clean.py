@@ -32,7 +32,7 @@ def norma_western(str):
     return unicodedata.normalize('NFD', str).encode('ascii', 'ignore').decode("utf-8")
 
 def ngram_fingerprint(value, n = 2):
-    value1 = value[4].lower()
+    value1 = value[2].lower()
     value1 = rm_punc(value1)
     value1 = rm_control(value1)
     value1 = value1.replace(' ', '')
@@ -46,7 +46,7 @@ def ngram_fingerprint(value, n = 2):
     result = ""
     for item in listx:
         result += item
-    return (value[0], (value[1], value[2], value[3], result, sortline(value[5]), value[6], date_transform(value[7]), value[8], value[9], value[10], value[11]))
+    return (value[0], (value[1], result, sortline(value[3]), date_transform(value[4]), value[5], value[6], value[7]))
 
 output = rdd.map(ngram_fingerprint)
 
