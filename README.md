@@ -1,5 +1,7 @@
 # COVID-19
 
+> Detailed description of our project and data clean part are in Data_Clean.pdf. Please read it.
+
 ## Datasets
 
 NYC MTA
