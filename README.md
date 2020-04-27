@@ -101,7 +101,7 @@ hfs rm -r station_borough_clean.out
 hfs -put station_borough_clean.out
 ```
 
-### Join turnstile data && station borough data
+### Join data
 ```
 spark-submit --conf \
 spark.pyspark.python=/share/apps/python/3.6.5/bin/python \
