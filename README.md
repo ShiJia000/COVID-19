@@ -14,12 +14,7 @@ http://web.mta.info/developers/data/nyct/subway/Stations.csv
 ### HDFS Datasets:
 Turnstile: /user/js11182/turnstile.csv 
 
-Turnstile clean: /user/hz2204/subway_data_sql.out
-
 Station and borough: /user/xj710/station_borough.out
-
-Turnstile station clean and sort line: /user/xj710/turnstile_station_clean.out
-
 
 ## Run Book
 ### merge_files.py
@@ -49,7 +44,17 @@ spark.pyspark.python=/share/apps/python/3.6.5/bin/python \
 ```
 
 ### clean the violations in turnstile data
+```
 spark-submit --conf \
 spark.pyspark.python=/share/apps/python/3.6.5/bin/python \
 /home/js11182/COVID-19/turnstile_violation_clean.py \
 /user/js11182/turnstile.csv
+```
+
+### extract the useful data in turnstile
+```
+spark-submit --conf \
+spark.pyspark.python=/share/apps/python/3.6.5/bin/python \
+/home/js11182/COVID-19/turnstile_extraction.py \
+/user/js11182/turnstile_violation_clean.out
+```
