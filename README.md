@@ -1,6 +1,6 @@
 # COVID-19
 
-Detailed description of our project and data clean part are in <b>Data_Clean.pdf. Please read it!!!</b>
+Detailed description of our project and data clean part are in <b>Data_Cleaning.pdf</b>. Please read it!!!
 
 ## Datasets
 
