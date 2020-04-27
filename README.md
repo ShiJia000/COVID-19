@@ -62,13 +62,26 @@ spark.pyspark.python=/share/apps/python/3.6.5/bin/python \
 ### station clean in turnstile
 ```
 hfs -getmerge turnstile_extraction.out turnstile_extraction.out
-
 hfs -rm -r turnstile_extraction.out
-
 hfs -put turnstile_extraction.out
 
 spark-submit --conf \
 spark.pyspark.python=/share/apps/python/3.6.5/bin/python \
 /home/js11182/COVID-19/turnstile_station_clean.py \
 /user/js11182/turnstile_extraction.out
+```
+
+
+
+### join turnstile data && station borough data
+```
+hfs -getmerge turnstile_station_clean.out turnstile_station_clean.out
+hfs -rm -r turnstile_station_clean.out
+hfs -put turnstile_station_clean.out
+
+spark-submit --conf \
+spark.pyspark.python=/share/apps/python/3.6.5/bin/python \
+/home/js11182/COVID-19/join_data.py \
+/user/xj710/station_borough.out \
+/user/js11182/turnstile_station_clean.out
 ```

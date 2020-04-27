@@ -6,7 +6,7 @@ def formal_output(out):
 	key = out[0]
 	value1 = out[1][0]
 	value2 = out[1][1]
-	return ((value2[0],value2[1],key[0],key[1],value2[2],value2[3]),(value1,int(value2[4]),int(value2[5]))) #station,line,unit,scp,date,time,ent,exit,borough
+	return ((value2[0],value2[1],key[0],key[1],value2[2],value2[3]),(value1,int(float(value2[4])),int(float(value2[5])))) #station,line,unit,scp,date,time,ent,exit,borough
 
 def sortOutput(x):
 	return x[0][0]+','+x[0][1]+','+x[0][2]+','+x[0][3]+','+x[0][4]+','+x[0][5]+','+x[1][0]+','+str(x[1][1])+','+str(x[1][2])
@@ -31,5 +31,5 @@ if __name__ == "__main__":
 
 	sort_output = output.map(sortOutput)
 
-	sort_output.saveAsTextFile('All_subway.out')
+	sort_output.saveAsTextFile('all_subway.out')
 	sc.stop()
