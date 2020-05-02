@@ -3,7 +3,7 @@ import os
 import glob
 
 path = 'datasets/'
-file_list = glob.glob(path + 'turnstile_20*.txt')
+file_list = glob.glob(path + 'turnstile_*.txt')
 
 if __name__ == "__main__":
 	# add relative path
