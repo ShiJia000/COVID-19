@@ -2,7 +2,10 @@
 
 Detailed description of our project and data clean part are in <b>[Data_Cleaning.pdf](https://github.com/ShiJia000/COVID-19/blob/master/Data_Cleaning.pdf)</b>. Please read it!!!
 
+
 ## Datasets
+
+[datasets-used.csv](https://github.com/ShiJia000/COVID-19/blob/master/datasets/datasets-used.csv)
 
 NYC MTA
 http://web.mta.info/developers/turnstile.html
@@ -12,6 +15,9 @@ http://web.mta.info/developers/resources/nyct/turnstile/ts_Field_Description.txt
 
 MTA Stations to County:
 http://web.mta.info/developers/data/nyct/subway/Stations.csv
+
+COVID-19 Positive Cases for each County:
+https://github.com/nytimes/covid-19-data
 
 ### HDFS Datasets:
 
