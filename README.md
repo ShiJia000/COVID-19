@@ -5,12 +5,14 @@ Detailed description of our project and data clean part are in <b>[Data_Cleaning
 ## Google Map API
 
 install googlemaps module
-
+```
 $ pip install -U googlemaps
+```
 
 get the relationship between station and zipcode
-
+```
 $ python transfer_zipcode.py
+```
 
 ## Datasets
 
