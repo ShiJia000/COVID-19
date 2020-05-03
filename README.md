@@ -33,6 +33,11 @@ Station Borough: `/user/xj710/stations.csv`
 ## Run Book
 
 Go to the COVID-19/ path
+### Data Download
+```
+git clone https://github.com/nychealth/coronavirus-data
+sh import.sh > COVID-19.csv
+```
 
 ### Data Wrangling 
 
