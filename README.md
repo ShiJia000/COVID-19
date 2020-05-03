@@ -40,10 +40,9 @@ Station Borough: `/user/xj710/stations.csv`
 
 Go to the COVID-19/ path
 ### Data Download
+Download 'import.sh' which comes from https://github.com/remram44/coronavirus-data (author by remram44)
 ```
 git clone https://github.com/nychealth/coronavirus-data
-
-// download import.sh from https://github.com/remram44/coronavirus-data (author by remram44)
 sh import.sh > COVID-19.csv
 ```
 
