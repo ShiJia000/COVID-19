@@ -11,6 +11,7 @@ spark = SparkSession.builder.appName("covid").getOrCreate()
 Subway = spark.read.format('csv').options(header='false',inferschema='true').load(sys.argv[1])
 Subway.createOrReplaceTempView("Subway")
 
+
 data = spark.sql("SELECT s._c5, s._c0, s._c1, s._c2, s._c3, s._c4, s._c7, s._c8 \
 				FROM Subway s, \
 					(SELECT Min(_c5) as ti, _c0, _c1, _c2, _c3, _c4 \
@@ -32,5 +33,5 @@ data.select(format_string("%s,%s,%s,%s,%s,%s,%s,%s", \
 				data["s._c4"], \
 				data["s._c5"], \
 				data["s._c7"], \
-				data["s._C8"])) \
+				data["s._c8"])) \
 		.write.save("turnstile_extraction.out", format="text")

@@ -41,6 +41,13 @@ python3 merge_files.py datasets/turnstile.txt
 python3 convert_data_from_txt_to_csv.py datasets/turnstile.txt datasets/turnstile.csv
 ```
 
+#### sort the turnstile data
+```
+spark-submit --conf \
+spark.pyspark.python=/share/apps/python/3.6.5/bin/python \
+turnstile_sort.py \
+/user/js11182/turnstile.csv
+```
 
 ### Data Detect
 
