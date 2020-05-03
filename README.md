@@ -76,7 +76,7 @@ turnstile_data_detect.py \
 ```
 spark-submit --conf \
 spark.pyspark.python=/share/apps/python/3.6.5/bin/python \
-covid_19_data_clean.py \
+covid19_data_detect.py \
 /user/hz2204/COVID-19_clean.csv
 ```
 
