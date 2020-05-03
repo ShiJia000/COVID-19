@@ -43,7 +43,7 @@ Go to the COVID-19/ path
 Download 'import.sh' which comes from https://github.com/remram44/coronavirus-data (author by remram44)
 ```
 git clone https://github.com/nychealth/coronavirus-data
-sh import.sh > COVID-19.csv
+sh import.sh > datasets/COVID-19.csv
 ```
 
 ### Data Wrangling 
