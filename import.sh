@@ -1,5 +1,5 @@
 #!/bin/sh
-# author by albertsun
+# author by remram44
 
 set -eu
 
