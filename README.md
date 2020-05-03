@@ -97,6 +97,11 @@ hfs -rm -r turnstile_violation_clean.out
 hfs -put turnstile_violation_clean.out
 ```
 
+#### Clean covid-19 data
+```
+python clean_covid19_data.py COVID-19.csv COVID-19_clean.csv
+```
+
 #### Extract the useful data in turnstile
 ```
 spark-submit --conf \
