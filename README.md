@@ -8,6 +8,10 @@ install googlemaps module
 
 $ pip install -U googlemaps
 
+get the relationship between station and zipcode
+
+$ python transfer_zipcode.py
+
 ## Datasets
 
 [datasets-used.csv](https://github.com/ShiJia000/COVID-19/blob/master/datasets/datasets-used.csv)
@@ -34,7 +38,6 @@ Station Borough: `/user/xj710/stations.csv`
 
 Go to the COVID-19/ path
 ### Data Download
-#### get COVID-19 data
 ```
 git clone https://github.com/nychealth/coronavirus-data
 sh import.sh > COVID-19.csv
