@@ -2,6 +2,11 @@
 
 Detailed description of our project and data clean part are in <b>[Data_Cleaning.pdf](https://github.com/ShiJia000/COVID-19/blob/master/Data_Cleaning.pdf)</b>. Please read it!!!
 
+## Google Map API
+
+install googlemaps module
+
+$ pip install -U googlemaps
 
 ## Datasets
 
