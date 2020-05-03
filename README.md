@@ -85,6 +85,24 @@ turnstile_data_detect.py \
 /user/js11182/turnstile.csv
 ```
 
+#### Detect data issues of COVID-19
+
+```
+spark-submit --conf \
+spark.pyspark.python=/share/apps/python/3.6.5/bin/python \
+covid19_data_detect.py \
+/user/hz2204/COVID-19_clean.csv
+```
+#### Detect data issues of COVID-19 and Station (matching zipcode)
+
+```
+spark-submit --conf \
+spark.pyspark.python=/share/apps/python/3.6.5/bin/python \
+covid19_and_station_data_detect.py \
+/user/hz2204/COVID-19_clean.csv \
+/user/hz2204/station_zipcode.csv
+```
+
 ### Data Cleaning 
 
 #### Clean the violations in turnstile data
