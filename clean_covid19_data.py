@@ -20,7 +20,7 @@ with open(out_path,'w') as outfile:
 				writablefile.writerow(['DATE','ZIPCODE','POSITIVE','TOTAL','RATE'])
 				count = 1
 				continue
-			if row[1] == 'NA' or 99999:
+			if row[1] == 'NA' or row[1]=='99999':
 				continue
 			
 			date = row[0].split('T')[0].split('-')
