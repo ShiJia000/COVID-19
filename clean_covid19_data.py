@@ -26,5 +26,10 @@ with open(out_path,'w') as outfile:
 			date = row[0].split('T')[0].split('-')
 			date_str = '{1:s}/{2:s}/{0:s}'.format(date[0],date[1],date[2])
 			date_format = datetime.datetime.strptime(date_str, '%m/%d/%Y').date() #date
-			rate = '{0:.2f}'.format(int(row[2])/int(row[3])*100)
-			writablefile.writerow([date_format,row[1],row[2],row[3],rate])
+
+			if str(date_format) != '2020-04-26' :
+				rate = '{0:.2f}'.format(int(row[2])/int(row[3])*100)
+				writablefile.writerow([date_format,row[1],row[2],row[3],rate])
+			else:
+				rate = '{0:.2f}'.format(int(row[3])/int(row[2])*100)
+				writablefile.writerow([date_format,row[1],row[3],row[2],rate])
