@@ -1,5 +1,6 @@
 #!/bin/sh
 # author by remram44
+# link: https://github.com/remram44/coronavirus-data
 
 set -eu
 
