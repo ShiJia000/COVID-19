@@ -36,6 +36,8 @@ Turnstile: `/user/js11182/turnstile.csv `
 
 Station Borough: `/user/xj710/stations.csv`
 
+COVID-19: `/user/hz2204/COVID-19_clean.csv`
+
 ## Run Book
 
 Go to the COVID-19/ path
