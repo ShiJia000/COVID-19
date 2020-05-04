@@ -170,4 +170,5 @@ turnstile_borough_join.py \
 # 数据分析 ideas
 #### Find Top 5 (or max) positive cases and number of people in station
 #### Find average positive cases and number of people in station per week/ month
-#### Calculate outlier using IQR
+#### Calculate outlier(in turnstile data) using IQR
+#### show data on map (spatial)
