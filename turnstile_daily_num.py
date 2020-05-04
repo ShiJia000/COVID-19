@@ -69,15 +69,15 @@ for l in reader:
 			or turnstile == ["R022", "00-05-03", "34 ST-HERALD SQ", "BDFMNQRW"] \
 			or turnstile == ["R132", "00-00-04", "125 ST", "456"] \
 			or turnstile == ["R362", "00-00-00", "ALLERTON AV", "25"]:
-				if daily_num[0] > threahold:
-					daily_num[0] = yest_daily_num[0]
-				if daily_num[1] > threahold:
-					daily_num[1] = yest_daily_num[1]
-
 				if daily_num[0] < 0:
 					daily_num[0] = -daily_num[0]
 				if daily_num[1] < 0:
 					daily_num[1] = -daily_num[1]
+
+				if daily_num[0] > threahold:
+					daily_num[0] = yest_daily_num[0]
+				if daily_num[1] > threahold:
+					daily_num[1] = yest_daily_num[1]
 
 			else:
 				# entrance
@@ -91,7 +91,6 @@ for l in reader:
 			# update yesterday data
 			yest_daily_num = daily_num
 
-			print('.')
 			writer.writerow(l_turnstile + [date] + daily_num)
 
 		# update
@@ -105,7 +104,6 @@ for l in reader:
 		if num != ["", ""]:
 			daily_num = yest_daily_num
 
-		print('.')
 		writer.writerow(l_turnstile + [date] + daily_num)
 
 		# update
