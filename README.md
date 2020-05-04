@@ -209,6 +209,7 @@ turnstile_borough_join.py \
 1. 有24个turnstile 倒着计数
 2. 有几个turnstile 有规律地跳动
 3. 有一些大约30000的  24小时平均每分钟过20个人[30000是我们的outlier]
+4. 研究过程很曲折
 
 # 数据分析 ideas
 #### 比较19年和20年的turnstile数据
