@@ -78,7 +78,19 @@ upload this csv data to HDFS(`/user/js11182/turnstile_daily.csv`)
 cd datasets/
 hfs -put turnstile_daily.csv
 ```
-
+#### join station table with zipcode table
+group by (station, date) => output file: station_numPeople_per_day_output.csv
+```
+spark-submit --conf spark.pyspark.python=/share/apps/python/3.6.5/bin/python /home/xj710/project/station_numPeople_per_day.py /user/js11182/turnstile_daily.csv
+```
+join and group by (zipcode) => output file: station_join_zipcode_output.csv
+```
+spark-submit --conf spark.pyspark.python=/share/apps/python/3.6.5/bin/python /home/xj710/project/station_join_zipcode.py /user/xj710/station_zipcode.csv /user/xj710/station_numPeople_per_day_output.csv
+```
+check abnormal data => output file: abnormal_output.csv
+```
+spark-submit --conf spark.pyspark.python=/share/apps/python/3.6.5/bin/python /home/xj710/project/data_abmormal_test.py /user/xj710/station_join_zipcode_output.csv
+```
 ### Data Detect
 
 #### python & spark version
