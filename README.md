@@ -32,15 +32,17 @@ https://github.com/nytimes/covid-19-data
 
 ### HDFS Datasets:
 
-Turnstile: `/user/js11182/turnstile.csv `
+Turnstile: `/user/js11182/turnstile.csv`
 
 Station Borough: `/user/xj710/stations.csv`
 
 COVID-19: `/user/hz2204/COVID-19_clean.csv`
 
+Turnstile daily clean data: `/user/js11182/turnstile_daily.csv`
+
 ## Run Book
 
-Go to the COVID-19/ path
+Go to the `COVID-19/` path
 ### Data Download
 Download 'import.sh' which comes from https://github.com/remram44/coronavirus-data (author by remram44)
 ```
@@ -66,6 +68,15 @@ spark-submit --conf \
 spark.pyspark.python=/share/apps/python/3.6.5/bin/python \
 turnstile_sort.py \
 /user/js11182/turnstile.csv
+```
+#### run script to transfer culumative data to daily num
+```
+python3 turnstile_daily_num.py
+```
+upload this csv data to HDFS(`/user/js11182/turnstile_daily.csv`)
+```
+cd datasets/
+hfs -put turnstile_daily.csv
 ```
 
 ### Data Detect
@@ -166,6 +177,11 @@ turnstile_borough_join.py \
 /user/js11182/station_borough_clean.out \
 /user/js11182/turnstile_station_clean.out
 ```
+
+# 一些有趣的points:
+1. 有24个turnstile 倒着计数
+2. 有几个turnstile 有规律地跳动
+3. 有一些大约30000的  24小时平均每分钟过20个人[30000是我们的outlier]
 
 # 数据分析 ideas
 #### 比较19年和20年的turnstile数据
