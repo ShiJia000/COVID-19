@@ -5,8 +5,14 @@ Detailed description of our project and data clean part are in <b>[Data_Cleaning
 ## Google Map API
 
 install googlemaps module
-
+```
 $ pip install -U googlemaps
+```
+
+get the relationship between station and zipcode
+```
+$ python transfer_zipcode.py
+```
 
 ## Datasets
 
@@ -32,9 +38,18 @@ Station Borough: `/user/xj710/stations.csv`
 
 Turnstile daily clean data: `/user/js11182/turnstile_daily.csv`
 
+COVID-19: `/user/hz2204/COVID-19_clean.csv`
+
 ## Run Book
 
 Go to the `COVID-19/` path
+
+### Data Download
+Download 'import.sh' which comes from https://github.com/remram44/coronavirus-data (author by remram44)
+```
+git clone https://github.com/nychealth/coronavirus-data
+sh import.sh > datasets/COVID-19.csv
+```
 
 ### Data Wrangling 
 
@@ -83,6 +98,24 @@ turnstile_data_detect.py \
 /user/js11182/turnstile.csv
 ```
 
+#### Detect data issues of COVID-19
+
+```
+spark-submit --conf \
+spark.pyspark.python=/share/apps/python/3.6.5/bin/python \
+covid19_data_detect.py \
+/user/hz2204/COVID-19_clean.csv
+```
+#### Detect data issues of COVID-19 and Station (matching zipcode)
+
+```
+spark-submit --conf \
+spark.pyspark.python=/share/apps/python/3.6.5/bin/python \
+covid19_and_station_data_detect.py \
+/user/hz2204/COVID-19_clean.csv \
+/user/hz2204/station_zipcode.csv
+```
+
 ### Data Cleaning 
 
 #### Clean the violations in turnstile data
@@ -95,6 +128,11 @@ turnstile_violation_clean.py \
 hfs -getmerge turnstile_violation_clean.out turnstile_violation_clean.out
 hfs -rm -r turnstile_violation_clean.out
 hfs -put turnstile_violation_clean.out
+```
+
+#### Clean covid-19 data
+```
+python clean_covid19_data.py COVID-19.csv COVID-19_clean.csv
 ```
 
 #### Extract the useful data in turnstile
@@ -142,7 +180,16 @@ turnstile_borough_join.py \
 /user/js11182/turnstile_station_clean.out
 ```
 
-一些有趣的points:
+# 一些有趣的points:
 1. 有24个turnstile 倒着计数
 2. 有几个turnstile 有规律地跳动
 3. 有一些大约30000的  24小时平均每分钟过20个人[30000是我们的outlier]
+
+
+# 数据分析 ideas
+#### Find Top 5 (or max) positive cases and number of people in station
+#### Find average positive cases and number of people in station per week/ month
+#### Calculate outlier(in turnstile data) using IQR
+#### show data on map (spatial)
+#### clustering
+#### Association Rules

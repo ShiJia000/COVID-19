@@ -2,3 +2,4 @@ datasets/turnstile.csv
 datasets/turnstile.txt
 datasets/turnstile_daily.csv
 datasets/turnstile_sorted.out
+.DS_Store
