@@ -170,12 +170,13 @@ turnstile_borough_join.py \
 # 数据分析 ideas
 #### 比较19年和20年的turnstile数据
 #### Find Top 5 (or max) positive cases and number of people in station
+找zipcode出现的频率（概率）
 #### Find average positive cases and number of people in station per week/ month
 #### Calculate outlier(in turnstile data) using IQR
 #### show data on map (spatial)
 #### clustering
 #### Association Rules？？
-每周平均rate是上升还是下降，对应的average number of people in turntile是上升还是下降。求置信度、概率。
+每周平均rate是上升还是下降，对应的average number of people in turntile是上升还是下降。求置信度。
 
 X(Y) = 上升/ 下降
 
