@@ -172,3 +172,4 @@ turnstile_borough_join.py \
 #### Find average positive cases and number of people in station per week/ month
 #### Calculate outlier(in turnstile data) using IQR
 #### show data on map (spatial)
+#### clustering
