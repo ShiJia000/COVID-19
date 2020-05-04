@@ -166,3 +166,8 @@ turnstile_borough_join.py \
 /user/js11182/station_borough_clean.out \
 /user/js11182/turnstile_station_clean.out
 ```
+
+# 数据分析 ideas
+#### Find Top 5 (or max) positive cases and number of people in station
+#### Find average positive cases and number of people in station per week/ month
+#### Calculate outlier using IQR
