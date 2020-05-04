@@ -43,6 +43,7 @@ Turnstile daily clean data: `/user/js11182/turnstile_daily.csv`
 ## Run Book
 
 Go to the `COVID-19/` path
+
 ### Data Download
 Download 'import.sh' which comes from https://github.com/remram44/coronavirus-data (author by remram44)
 ```
@@ -69,6 +70,7 @@ spark.pyspark.python=/share/apps/python/3.6.5/bin/python \
 turnstile_sort.py \
 /user/js11182/turnstile.csv
 ```
+
 #### run script to transfer culumative data to daily num
 ```
 python3 turnstile_daily_num.py
@@ -78,19 +80,31 @@ upload this csv data to HDFS(`/user/js11182/turnstile_daily.csv`)
 cd datasets/
 hfs -put turnstile_daily.csv
 ```
+
 #### join station table with zipcode table
 group by (station, date) => output file: station_numPeople_per_day_output.csv
 ```
-spark-submit --conf spark.pyspark.python=/share/apps/python/3.6.5/bin/python /home/xj710/project/station_numPeople_per_day.py /user/js11182/turnstile_daily.csv
+spark-submit --conf \
+spark.pyspark.python=/share/apps/python/3.6.5/bin/python \
+/home/xj710/project/station_numPeople_per_day.py \
+/user/js11182/turnstile_daily.csv
 ```
 join and group by (zipcode) => output file: station_join_zipcode_output.csv
 ```
-spark-submit --conf spark.pyspark.python=/share/apps/python/3.6.5/bin/python /home/xj710/project/station_join_zipcode.py /user/xj710/station_zipcode.csv /user/xj710/station_numPeople_per_day_output.csv
+spark-submit --conf \
+spark.pyspark.python=/share/apps/python/3.6.5/bin/python \
+/home/xj710/project/station_join_zipcode.py \
+/user/xj710/station_zipcode.csv \
+/user/xj710/station_numPeople_per_day_output.csv
 ```
 check abnormal data => output file: abnormal_output.csv
 ```
-spark-submit --conf spark.pyspark.python=/share/apps/python/3.6.5/bin/python /home/xj710/project/data_abmormal_test.py /user/xj710/station_join_zipcode_output.csv
+spark-submit --conf \
+spark.pyspark.python=/share/apps/python/3.6.5/bin/python \
+/home/xj710/project/data_abmormal_test.py \
+/user/xj710/station_join_zipcode_output.csv
 ```
+
 ### Data Detect
 
 #### python & spark version
@@ -116,6 +130,7 @@ spark.pyspark.python=/share/apps/python/3.6.5/bin/python \
 covid19_data_detect.py \
 /user/hz2204/COVID-19_clean.csv
 ```
+
 #### Detect data issues of COVID-19 and Station (matching zipcode)
 
 ```
