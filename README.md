@@ -246,3 +246,7 @@ turnstile_borough_join.py \
 
 
 ## Datasets
+
+# 数据分析
+1. 由于州长和川普不同的发言导致异常图像和极值点出现https://abcnews.go.com/US/timeline-cuomos-trumps-responses-coronavirus-outbreak/story?id=69914641 （dataset: turnstile_nyc_daily_change.csv）
+
