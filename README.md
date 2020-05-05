@@ -213,15 +213,19 @@ turnstile_borough_join.py \
 
 # 数据分析 ideas
 #### 比较19年和20年的turnstile数据
-#### Find Top 5 (or max) positive cases and number of people in station
-找zipcode出现的频率（概率）
-#### Find average positive cases and number of people in station per week/ month
 #### Calculate outlier(in turnstile data) using IQR
-#### show data on map (spatial)
-#### clustering
-#### Association Rules？？
-每周平均rate是上升还是下降，对应的average number of people in turntile是上升还是下降。求置信度。
+#### metadata
+#### zipcode, (station1, station2…)
+#### data analysis
+1. identify potential quality issues
+	Null Values
+	Find outlier
+2. spatial converage
+    1. which regions that are data poor
+    2. is there missing data for certain regions
+    3. how does spatial coverage vary over time
+    4. is there a correlation
+3. most frequent, max, mean, standard deviation
 
-X(Y) = 上升/ 下降
 
 ## Datasets
