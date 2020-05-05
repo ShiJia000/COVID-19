@@ -243,7 +243,9 @@ spark-submit --conf \
 spark.pyspark.python=/share/apps/python/3.6.5/bin/python \
 covid19_NYC_and_zipcode_data_output.py \
 /user/hz2204/COVID-19_clean.csv
-
+```
+Download data from HDFS to datasets (/user/hz2204/covid19_NYC_cases.out)
+```
 python convert_data_from_txt_to_csv.py datasets/covid19_NYC_cases.out datasets/covid19_NYC_cases.csv
 
 python covid19_NYC_daily_change.py datasets/covid19_NYC_cases.csv datasets/covid19_NYC_cases_change.csv
@@ -254,7 +256,9 @@ spark-submit --conf \
 spark.pyspark.python=/share/apps/python/3.6.5/bin/python \
 covid19_NYC_and_zipcode_data_output.py \
 /user/hz2204/COVID-19_clean.csv
-
+```
+Download data from HDFS to datasets (/user/hz2204/covid19_zipcode_cases.out)
+```
 python convert_data_from_txt_to_csv.py datasets/covid19_zipcode_cases.out datasets/covid19_zipcode_cases.csv
 
 python covid19_each_area_daily_change.py datasets/covid19_zipcode_cases.csv datasets/covid19_zipcode_cases_change.csv
