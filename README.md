@@ -164,6 +164,14 @@ hfs -put turnstile_violation_clean.out
 ```
 python clean_covid19_data.py COVID-19.csv COVID-19_clean.csv
 ```
+#### Extract covid-19 data with the same zipcode in the station data
+```
+spark-submit --conf \
+spark.pyspark.python=/share/apps/python/3.6.5/bin/python \
+match_covid19_and_station_zipcode.py \
+/user/hz2204/COVID-19_clean.csv \
+/user/hz2204/station_zipcode.csv
+```
 
 #### Extract the useful data in turnstile
 ```
