@@ -20,6 +20,8 @@ if __name__ == "__main__":
     station_zipcode = sc.textFile(sys.argv[1], 1)
     station_zipcode = station_zipcode.mapPartitions(lambda x: reader(x))
     station_zipcode = station_zipcode.filter(lambda line: line[1] != "STATION")
+    station_zipcode = station_zipcode.filter(lambda line: line[2] != "07114")
+    station_zipcode = station_zipcode.filter(lambda line: line[2] != "13416")
     station_zipcode = station_zipcode.map(lambda x: (x[1], x[2]))
 
     # argv[2]: station , date , entries , exits
