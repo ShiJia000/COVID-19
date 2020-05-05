@@ -236,6 +236,29 @@ turnstile_borough_join.py \
 /user/js11182/station_borough_clean.out \
 /user/js11182/turnstile_station_clean.out
 ```
+### Data Analysis
+#### COVID19 cases in NYC daily change
+```
+spark-submit --conf \
+spark.pyspark.python=/share/apps/python/3.6.5/bin/python \
+covid19_NYC_and_zipcode_data_output.py \
+/user/hz2204/COVID-19_clean.csv
+
+python convert_data_from_txt_to_csv.py datasets/covid19_NYC_cases.out datasets/covid19_NYC_cases.csv
+
+python covid19_NYC_daily_change.py datasets/covid19_NYC_cases.csv datasets/covid19_NYC_cases_change.csv
+```
+#### COVID19 cases in each area(zipcode) of NYC daily change
+```
+spark-submit --conf \
+spark.pyspark.python=/share/apps/python/3.6.5/bin/python \
+covid19_NYC_and_zipcode_data_output.py \
+/user/hz2204/COVID-19_clean.csv
+
+python convert_data_from_txt_to_csv.py datasets/covid19_zipcode_cases.out datasets/covid19_zipcode_cases.csv
+
+python covid19_each_area_daily_change.py datasets/covid19_zipcode_cases.csv datasets/covid19_zipcode_cases_change.csv
+```
 
 # 一些有趣的points:
 1. 有24个turnstile 倒着计数
