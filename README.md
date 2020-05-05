@@ -75,6 +75,10 @@ spark.pyspark.python=/share/apps/python/3.6.5/bin/python \
 turnstile_sort.py \
 /user/js11182/turnstile.csv
 ```
+download the sorted turnstile data
+```
+hfs -getmerge turnstile_sorted.out datasets/turnstile_sorted.out
+```
 
 #### run script to transfer culumative data to daily num
 ```
