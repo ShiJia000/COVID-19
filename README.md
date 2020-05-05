@@ -91,14 +91,16 @@ hfs -put turnstile_daily.csv
 ```
 
 #### join station table with zipcode table
-group by (station, date) => output file: station_numPeople_per_day_output.csv
+group by (station, date) 
+>> output file: station_numPeople_per_day_output.csv
 ```
 spark-submit --conf \
 spark.pyspark.python=/share/apps/python/3.6.5/bin/python \
 /home/xj710/project/station_numPeople_per_day.py \
 /user/js11182/turnstile_daily.csv
 ```
-join and group by (zipcode) => output file: station_join_zipcode_output.csv
+join and group by (zipcode) 
+>> output file: station_join_zipcode_output.csv
 ```
 spark-submit --conf \
 spark.pyspark.python=/share/apps/python/3.6.5/bin/python \
@@ -106,11 +108,22 @@ spark.pyspark.python=/share/apps/python/3.6.5/bin/python \
 /user/xj710/station_zipcode.csv \
 /user/xj710/station_numPeople_per_day_output.csv
 ```
-check abnormal data => output file: abnormal_output.csv
+check abnormal data 
+>> output file: abnormal_output.csv
 ```
 spark-submit --conf \
 spark.pyspark.python=/share/apps/python/3.6.5/bin/python \
 /home/xj710/project/data_abmormal_test.py \
+/user/xj710/station_join_zipcode_output.csv
+```
+#### get top/low 10 numPeople in 2019/2020
+>> output file: mean_out_in_top10_2019.csv => sum(avg(numPeopleIn) + avg(numPeopleOut)) per zipcode per month in 2019/2020
+mean_out_in_top10.csv => top 10 of (numPeopleIn + numPeopleOut) in 2019/2020
+mean_out_in_low10.csv => low 10 of (numPeopleIn + numPeopleOut) in 2019/2020
+```
+spark-submit --conf \
+spark.pyspark.python=/share/apps/python/3.6.5/bin/python \
+/home/xj710/project/mean_in_out_top_low10.py \
 /user/xj710/station_join_zipcode_output.csv
 ```
 
@@ -249,5 +262,4 @@ turnstile_borough_join.py \
 
 # 数据分析
 1. 由于州长和川普不同的发言导致异常图像和极值点出现https://abcnews.go.com/US/timeline-cuomos-trumps-responses-coronavirus-outbreak/story?id=69914641 （dataset: turnstile_nyc_daily_change.csv）
-得出结论：控制疫情不仅要医务人员的努力 政府引导对疫情有重大意义
 
