@@ -92,7 +92,7 @@ hfs -put turnstile_daily.csv
 
 #### join station table with zipcode table
 group by (station, date) 
-> output file: station_numPeople_per_day_output.csv
+> output file: /user/xj710/station_numPeople_per_day_output.csv
 ```
 spark-submit --conf \
 spark.pyspark.python=/share/apps/python/3.6.5/bin/python \
@@ -100,7 +100,7 @@ spark.pyspark.python=/share/apps/python/3.6.5/bin/python \
 /user/js11182/turnstile_daily.csv
 ```
 join and group by (zipcode) 
-> output file: station_join_zipcode_output.csv
+> output file: /user/xj710/station_join_zipcode_output.csv
 ```
 spark-submit --conf \
 spark.pyspark.python=/share/apps/python/3.6.5/bin/python \
@@ -109,7 +109,7 @@ spark.pyspark.python=/share/apps/python/3.6.5/bin/python \
 /user/xj710/station_numPeople_per_day_output.csv
 ```
 check abnormal data 
-> output file: abnormal_output.csv
+> output file: /user/xj710/abnormal_output.csv
 ```
 spark-submit --conf \
 spark.pyspark.python=/share/apps/python/3.6.5/bin/python \
@@ -117,11 +117,11 @@ spark.pyspark.python=/share/apps/python/3.6.5/bin/python \
 /user/xj710/station_join_zipcode_output.csv
 ```
 #### get top/low 10 numPeople in 2019/2020
-> output file: mean_out_in_top10_2019.csv => sum(avg(numPeopleIn) + avg(numPeopleOut)) per zipcode per month in 2019/2020
+> output file: /user/xj710/mean_out_in_top10_2019.csv => sum(avg(numPeopleIn) + avg(numPeopleOut)) per zipcode per month in 2019/2020
 
-> mean_out_in_top10.csv => top 10 of (numPeopleIn + numPeopleOut) in 2019/2020
+> /user/xj710/mean_out_in_top10.csv => top 10 of (numPeopleIn + numPeopleOut) in 2019/2020
 
-> mean_out_in_low10.csv => low 10 of (numPeopleIn + numPeopleOut) in 2019/2020
+> /user/xj710/mean_out_in_low10.csv => low 10 of (numPeopleIn + numPeopleOut) in 2019/2020
 ```
 spark-submit --conf \
 spark.pyspark.python=/share/apps/python/3.6.5/bin/python \
