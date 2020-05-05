@@ -119,9 +119,9 @@ spark.pyspark.python=/share/apps/python/3.6.5/bin/python \
 #### get top/low 10 numPeople in 2019/2020
 > output file: mean_out_in_top10_2019.csv => sum(avg(numPeopleIn) + avg(numPeopleOut)) per zipcode per month in 2019/2020
 
-mean_out_in_top10.csv => top 10 of (numPeopleIn + numPeopleOut) in 2019/2020
+> mean_out_in_top10.csv => top 10 of (numPeopleIn + numPeopleOut) in 2019/2020
 
-mean_out_in_low10.csv => low 10 of (numPeopleIn + numPeopleOut) in 2019/2020
+> mean_out_in_low10.csv => low 10 of (numPeopleIn + numPeopleOut) in 2019/2020
 ```
 spark-submit --conf \
 spark.pyspark.python=/share/apps/python/3.6.5/bin/python \
