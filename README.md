@@ -117,7 +117,7 @@ spark.pyspark.python=/share/apps/python/3.6.5/bin/python \
 /user/xj710/station_join_zipcode_output.csv
 ```
 #### get top/low 10 numPeople in 2019/2020
-> output file: /user/xj710/mean_out_in_top10_2019.csv => sum(avg(numPeopleIn) + avg(numPeopleOut)) per zipcode per month in 2019/2020
+> output file: /user/xj710/mean_out_in_2019_2020.csv  => sum(avg(numPeopleIn) + avg(numPeopleOut)) per zipcode per month in 2019/2020
 
 > /user/xj710/mean_out_in_top10.csv => top 10 of (numPeopleIn + numPeopleOut) in 2019/2020
 
