@@ -249,4 +249,5 @@ turnstile_borough_join.py \
 
 # 数据分析
 1. 由于州长和川普不同的发言导致异常图像和极值点出现https://abcnews.go.com/US/timeline-cuomos-trumps-responses-coronavirus-outbreak/story?id=69914641 （dataset: turnstile_nyc_daily_change.csv）
+得出结论：控制疫情不仅要医务人员的努力 政府引导对疫情有重大意义
 
