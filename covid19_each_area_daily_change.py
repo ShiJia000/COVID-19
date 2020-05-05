@@ -9,7 +9,7 @@ with open(sys.argv[2],'w') as outfile:
 		for row in readablefile:
 			writablefile = csv.writer(outfile)
 			if count==0:
-				writablefile.writerow(['DATE','ZIPCODE','POSITIVE','TOTAL','RATE','DIFF'])
+				writablefile.writerow(['ZIPCODE','DATE','POSITIVE','TOTAL','RATE','DIFF'])
 				count = 1
 				pre_data = [row[0],row[1],row[2],row[3],row[4]]
 				writablefile.writerow([row[0],row[1],row[2],row[3],row[4], 0])
