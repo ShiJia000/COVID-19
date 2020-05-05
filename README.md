@@ -62,6 +62,11 @@ python3 merge_files.py datasets/turnstile.txt
 ```
 python3 convert_data_from_txt_to_csv.py datasets/turnstile.txt datasets/turnstile.csv
 ```
+upload this csv data to HDFS(`/user/js11182/turnstile.csv`)
+```
+cd datasets/
+hfs -put turnstile.csv
+```
 
 #### sort the turnstile data
 ```
