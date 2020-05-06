@@ -116,6 +116,14 @@ spark.pyspark.python=/share/apps/python/3.6.5/bin/python \
 /home/xj710/project/data_abmormal_test.py \
 /user/xj710/station_join_zipcode_output.csv
 ```
+
+#### find daily change number of turnstile data for the whole NYC by date
+
+```
+spark-submit --conf spark.pyspark.python=/share/apps/python/3.6.5/bin/python turnstile_nyc_daily_change.py /user/xj710/station_join_zipcode_output.csv
+```
+Download the turnstile_nyc_daily_change.csv and you can draw the graph for daily change
+
 #### get top/low 10 numPeople in 2019/2020
 > output file: /user/xj710/mean_out_in_2019_2020.csv  => sum(avg(numPeopleIn) + avg(numPeopleOut)) per zipcode per month in 2019/2020
 
