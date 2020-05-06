@@ -269,6 +269,7 @@ python covid19_each_area_daily_change.py datasets/covid19_zipcode_cases.csv data
 2. 有几个turnstile 有规律地跳动
 3. 有一些大约40000的  24小时平均每分钟超过20个人[40000是我们的outlier]
 4. 研究过程很曲折
+5. 越穷越坐地铁出行 --> 地铁人流比率变化少 --> covid19 positive cases高
 
 # 数据分析 ideas
 #### 比较19年和20年的turnstile数据
