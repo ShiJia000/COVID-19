@@ -2,6 +2,7 @@ import csv
 import datetime
 
 inFile = open("datasets/turnstile_sorted.out", "r")
+# inFile = open("a.csv", "r")
 reader = csv.reader(inFile)
 
 # new out file
@@ -33,10 +34,10 @@ for l in reader:
 	dt = datetime.datetime.strptime(date, "%Y-%m-%d")
 
 	l_timestamp = datetime.datetime.timestamp(l_dt)
+
 	timestamp = datetime.datetime.timestamp(dt)
 
-	# the same turnstile and the the two dates differ by one day
-	if turnstile == l_turnstile and l_timestamp - timestamp == 24 * 60 * 60:
+	if turnstile == l_turnstile and l_timestamp - timestamp >= 23 * 60 * 60 and l_timestamp - timestamp <= 25 * 60 * 60:
 
 		# make sure the first date of each turnstile is not calculated
 		if num != ["", ""]:
@@ -100,11 +101,11 @@ for l in reader:
 
 	# the same turnstile and the the two dates differ by more than one day
 	elif turnstile == l_turnstile and l_timestamp - timestamp > 24 * 60 * 60:
+
 		# use yesterday's num
 		if num != ["", ""]:
 			daily_num = yest_daily_num
-
-		writer.writerow(l_turnstile + [date] + daily_num)
+			writer.writerow(l_turnstile + [date] + daily_num)
 
 		# update
 		turnstile = l_turnstile
