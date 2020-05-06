@@ -152,6 +152,12 @@ spark.pyspark.python=/share/apps/python/3.6.5/bin/python \
 python3 select_nyc_income_zipcode.py
 ```
 
+#### join income data & positive case data by zip code to draw the graph
+```
+spark-submit --conf spark.pyspark.python=/share/apps/python/3.6.5/bin/python income_join_positive_case.py /user/hz2204/income_by_nyc_zipcode.csv /user/hz2204/covid19_zipcode_cases_change.csv
+```
+Download the data then you can draw the graph
+
 ### Data Detect
 
 #### python & spark version
