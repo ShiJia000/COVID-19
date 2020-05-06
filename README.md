@@ -147,6 +147,11 @@ spark.pyspark.python=/share/apps/python/3.6.5/bin/python \
 /user/xj710/mean_out_in_2019_2020.csv
 ```
 
+#### get income data of NYC by zip code
+```
+python3 select_nyc_income_zipcode.py
+```
+
 ### Data Detect
 
 #### python & spark version
