@@ -128,6 +128,16 @@ spark.pyspark.python=/share/apps/python/3.6.5/bin/python \
 /home/xj710/project/mean_in_out_top_low10.py \
 /user/xj710/station_join_zipcode_output.csv
 ```
+#### get the decreasing rate from 2019/2020 per zipcode
+> output file: /user/xi710/zipcode_sumnum_per_year => total num_people for Feb.+Mar.+Apr. in 2019/2020
+
+> /user/xj710/decrease_rate_2019_2020.csv => decreasing rate from 2019 to 2020 per zipcode
+```
+spark-submit --conf \
+spark.pyspark.python=/share/apps/python/3.6.5/bin/python \
+/home/xj710/project/decrease_rate_2019_2020.py \
+/user/xj710/mean_out_in_2019_2020.csv
+```
 
 ### Data Detect
 
@@ -269,7 +279,6 @@ python covid19_each_area_daily_change.py datasets/covid19_zipcode_cases.csv data
 2. 有几个turnstile 有规律地跳动
 3. 有一些大约40000的  24小时平均每分钟超过20个人[40000是我们的outlier]
 4. 研究过程很曲折
-5. 越穷越坐地铁出行 --> 地铁人流比率变化少 --> covid19 positive cases高
 
 # 数据分析 ideas
 #### 比较19年和20年的turnstile数据
