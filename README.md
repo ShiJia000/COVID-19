@@ -2,6 +2,9 @@
 
 Detailed description of our project and data clean part are in <b>[Data_Cleaning.pdf](https://github.com/ShiJia000/COVID-19/blob/master/Data_Cleaning.pdf)</b>. Please read it!!!
 
+## Google Docs
+https://docs.google.com/document/d/1gsvIYmaM1iovYlL8E0QqCpkHNREKnFUTYQeUM-03q9A/edit#
+
 ## Google Map API
 
 install googlemaps module
