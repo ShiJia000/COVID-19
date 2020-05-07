@@ -13,28 +13,31 @@ covid.createOrReplaceTempView("covid")
 #find min of positive cases
 min_positive = spark.sql("SELECT * FROM covid ORDER BY `Positive` ASC LIMIT 10")
 min_positive.select(format_string("%s,%s,%s,%s,%s",date_format(min_positive["`date`"],'yyyy-MM-dd'),min_positive["`MODZCTA`"],min_positive["`Positive`"],min_positive["`Total`"],min_positive["`zcta_cum.perc_pos`"])) \
-       .write.save("1.out",format="text")
+       .write.save("min_positive.out",format="text")
 
 #find max of positive cases
 max_positive = spark.sql("SELECT * FROM covid ORDER BY `Positive` DESC LIMIT 10")
 max_positive.select(format_string("%s,%s,%s,%s,%s",date_format(max_positive["`date`"],'yyyy-MM-dd'),max_positive["`MODZCTA`"],max_positive["`Positive`"],max_positive["`Total`"],max_positive["`zcta_cum.perc_pos`"])) \
-       .write.save("2.out",format="text")
+       .write.save("max_positive.out",format="text")
 
 #check illegal rate
 #-- rate is greater than 100
 check_rate = spark.sql("SELECT * FROM covid WHERE `zcta_cum.perc_pos` > 100")
-check_rate.coalesce(1).rdd.map(lambda x: ((x[0],x[1]),(x[2],x[3],[4]))).saveAsTextFile("3.out")
+check_rate.coalesce(1).rdd.map(lambda x: ((x[0],x[1]),(x[2],x[3],[4]))).saveAsTextFile("illegal_rate.out")
 #-- rate is null or not a number
 check_rate2 = spark.sql("SELECT `zcta_cum.perc_pos` FROM covid ORDER BY `zcta_cum.perc_pos` DESC")
-check_rate2.coalesce(1).rdd.map(lambda x: (x[0])).saveAsTextFile("4.out")
+check_rate2.coalesce(1).rdd.map(lambda x: (x[0])).saveAsTextFile("illegal_rate2.out")
+#-- positive num < total num
+check_rate3 = spark.sql("SELECT * FROM covid WHERE `Positive` > `Total`")
+check_rate3.coalesce(1).rdd.map(lambda x: ((x[0],x[1]),(x[2],x[3]))).saveAsTextFile("illegal_rate3.out")
 
 #find how many dates in the data
 num_dates = spark.sql("SELECT DISTINCT `date`, count(*) as num FROM covid GROUP BY `date` ORDER BY `date`")
 num_dates.select(format_string("%s,%s",date_format(num_dates["`date`"],'yyyy-MM-dd'),num_dates["num"])) \
-        .write.save("5.out",format="text")
+        .write.save("num_dates.out",format="text")
 
 #find how many zipcodes in the data
 num_codes = spark.sql("SELECT DISTINCT `MODZCTA`, count(*) as num FROM covid GROUP BY `MODZCTA` ORDER BY `MODZCTA`")
-num_codes.coalesce(1).rdd.map(lambda x: (x[0],x[1])).saveAsTextFile("6.out")
+num_codes.coalesce(1).rdd.map(lambda x: (x[0],x[1])).saveAsTextFile("num_codes.out")
 
 sc.stop()
