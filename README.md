@@ -199,7 +199,7 @@ turnstile_data_detect.py \
 spark-submit --conf \
 spark.pyspark.python=/share/apps/python/3.6.5/bin/python \
 covid19_data_detect.py \
-/user/hz2204/COVID-19_clean.csv
+/user/hz2204/COVID-19.csv
 ```
 
 #### Detect data issues of COVID-19 and Station (matching zipcode)
