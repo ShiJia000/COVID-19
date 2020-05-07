@@ -13,7 +13,7 @@ if __name__ == "__main__":
     if len(sys.argv) != 3: # check if the command is valid
         print("Usage: pythonfile <input file> <input file>", file=sys.stderr)
         exit(-1)
-    
+
     sc = SparkContext()
 
     # argv[1]: station , zipcode
@@ -27,16 +27,16 @@ if __name__ == "__main__":
     # argv[2]: station , date , entries , exits
     station_people = sc.textFile(sys.argv[2], 1)
     station_people = station_people.mapPartitions(lambda x: reader(x))
-    station_people = station_people.map(lambda x: (x[1], (x[2], x[3], x[4])))
-    
+    station_people = station_people.map(lambda x: (x[0], (x[1], x[2], x[3])))
+
     # inner join
-    output = station_zipcode.join(station_people) 
+    output = station_zipcode.join(station_people)
     output = output.map(lambda x: x[1][0] + ',' + ','.join(x[1][1]))
     output = output.mapPartitions(lambda x: reader(x))
     output = output.map(lambda x: ((x[0], x[1]), (x[2], x[3])))
     output = output.reduceByKey(reduce_add)
     output = output.sortByKey()
     output = output.map(lambda x: ','.join(x[0]) + ',' + ','.join(x[1]))
-    output = output.saveAsTextFile("test_join_output.csv")
+    output = output.saveAsTextFile("station_join_zipcode_output.csv")
 
     sc.stop()
