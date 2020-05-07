@@ -21,8 +21,12 @@ max_positive.select(format_string("%s,%d,%d,%d,%.2f",date_format(max_positive["`
        .write.save("max_positive.out",format="text")
 
 #check illegal rate
+#-- rate is greater than 100
 check_rate = spark.sql("SELECT * FROM covid WHERE `RATE` > 100")
 check_rate.coalesce(1).rdd.map(lambda x: ((x[0],x[1]),(x[2],x[3],[4]))).saveAsTextFile("illgeal_rate.out")
+#-- rate is null or not a number
+check_rate2 = spark.sql("SELECT `RATE` FROM covid ORDER BY `RATE` DESC")
+check_rate2.coalesce(1).rdd.map(lambda x: (x[0])).saveAsTextFile("illgeal_rate2.out")
 
 #find how many dates in the data
 num_dates = spark.sql("SELECT DISTINCT `DATE`, count(*) as num FROM covid GROUP BY `DATE` ORDER BY `DATE`")
