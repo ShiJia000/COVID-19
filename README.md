@@ -154,9 +154,24 @@ python3 select_nyc_income_zipcode.py
 
 #### join income data & positive case data by zip code to draw the graph
 ```
-spark-submit --conf spark.pyspark.python=/share/apps/python/3.6.5/bin/python income_join_positive_case.py /user/hz2204/income_by_nyc_zipcode.csv /user/hz2204/covid19_zipcode_cases_change.csv
+spark-submit --conf \
+spark.pyspark.python=/share/apps/python/3.6.5/bin/python \
+income_join_positive_case.py \
+/user/hz2204/income_by_nyc_zipcode.csv \
+/user/hz2204/covid19_zipcode_cases_change.csv
 ```
 Download the data then you can draw the graph
+
+#### join income data & positive cases & decrease rate
+> output file: /user/js11182/confirmed_join_decrease_output.csv
+```
+spark-submit --conf \
+spark.pyspark.python=/share/apps/python/3.6.5/bin/python \
+/home/xj710/project/confirmed_join_decrease.py \
+/user/xj710/income_join_positive.csv \
+/user/xj710/decrease_rate_2019_2020.csv
+```
+
 
 ### Data Detect
 
