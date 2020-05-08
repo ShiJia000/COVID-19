@@ -2,7 +2,7 @@ import sys
 import os
 import glob
 
-path = 'datasets/'
+path = 'datasets_raw/'
 file_list = glob.glob(path + 'turnstile_*.txt')
 
 if __name__ == "__main__":
