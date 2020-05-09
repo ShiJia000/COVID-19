@@ -15,6 +15,6 @@ if __name__ == "__main__":
     sample = sample.mapPartitions(lambda x: reader(x))
     output = sample.filter(lambda line: int(line[2]) > 1000000000)
 
-    output = output.saveAsTextFile("abnormal_output.csv")
+    output = output.saveAsTextFile("zipcode_daily_abnormal.csv")
 
     sc.stop()
