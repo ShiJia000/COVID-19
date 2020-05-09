@@ -297,29 +297,45 @@ Detailed description
   Calculate the daily change of passenger flow in NYC. (From 02/01/2020 to 04/30/2020)
 
   ```shell
-  spark-submit --conf spark.pyspark.python=/share/apps/python/3.6.5/bin/python nyc_mta_daily_change.py /user/js11182/zipcode_daily.csv
+  $ spark-submit --conf spark.pyspark.python=/share/apps/python/3.6.5/bin/python mta_daily_change.py /user/js11182/zipcode_daily.csv
+  
   # download the data and draw graph
+  $ hfs -getmerge mta_daily_change.out datasets_results/mta_daily_change.csv
   ```
 
   Draw Graph
 
+
+
+- **Step 5: [Dumbo Spark]**
+
+  get the monthly mean of MTA data
+
+  ```shell
+  $ spark-submit --conf spark.pyspark.python=/share/apps/python/3.6.5/bin/python mta_monthly_mean.py /user/js11182/zipcode_daily.csv
+  ```
+
   
 
-- 
+- **Step 6: [Dumbo Spark]**
 
-#### COVID-19 Cases
+  get the decreasing rate from 2019/2020 per zipcode
 
+  ```shell
+  $ spark-submit --conf spark.pyspark.python=/share/apps/python/3.6.5/bin/python /home/xj710/project/mta_decrease_rate.py /user/xj710/mta_monthly_mean.csv
+  ```
 
+  
 
+#### Relation among COVID-19 Cases, Income and MTA passenger flow
 
+- **Step 1: [Dumbo Spark]**
 
-## Data Visulization
+  Join 3 datasets together (MTA data, income data and COVID-19 data)
 
+  ```shell
+  
+  
+  ```
 
-
-## Results
-
-
-
-## Challenges
-
+  
