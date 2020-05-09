@@ -16,11 +16,11 @@ if __name__ == "__main__":
     out_path = os.path.join(this_path, sys.argv[2])
 
     # read txt 
-    print("Reading txt...")
-    df = pd.read_csv(in_path, delimiter=',')
+    print("Reading from " + sys.argv[1] + "...")
+    df = pd.read_csv(in_path, delimiter=',', low_memory=False)
     print("Reading done!")
 
     # write csv 
-    print("Writing csv...")
+    print("Writing to " + sys.argv[2] + "...")
     df.to_csv(out_path)
     print("Writing done!")

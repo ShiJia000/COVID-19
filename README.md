@@ -58,7 +58,7 @@ Detailed description
 
 - **NYC MTA turnstile:**
 
-  - **[Local] ** Merge the several turnstile datasets and save it to one text(.txt) file: 【这个马上就好】
+  - **[Local] ** Remove spaces at the beginning and at the end of the line. Then **merge the several turnstile datasets and save it to one text(.txt) file**: 【这个马上就好】
 
     ```shell
     # python3 merge_files.py + output file
@@ -82,7 +82,7 @@ Detailed description
     # run the detection script
     spark-submit --conf \
     spark.pyspark.python=/share/apps/python/3.6.5/bin/python \
-    turnstile_data_detect.py \
+    turnstile_detect.py \
     /user/js11182/turnstile.csv
     ```
 
