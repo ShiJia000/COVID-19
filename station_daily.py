@@ -1,5 +1,3 @@
-from __future__ import print_function
-
 import sys
 from pyspark import SparkContext
 from csv import reader
@@ -23,6 +21,6 @@ if __name__ == "__main__":
     output = station_sample.reduceByKey(reduce_add)
     output = output.sortByKey()
     output = output.map(lambda x: ','.join(x[0]) + ',' + ','.join(x[1]))
-    output = output.saveAsTextFile("station_numPeople_per_day_output.csv")
+    output = output.saveAsTextFile("station_daily.csv")
 
     sc.stop()
