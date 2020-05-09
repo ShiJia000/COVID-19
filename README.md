@@ -86,7 +86,7 @@ Detailed description
 
 - **Step 1: [Local] ** 
 
-  Remove spaces at the beginning and at the end of the line. Then merge the several turnstile datasets and save it to one text(.txt) file: 【这个script执行比较快】
+  Remove spaces at the beginning and at the end of the line. Then merge the several turnstile datasets and save it to one text(.txt) file
 
   ``` shell
   # python3 merge_files.py + output file
@@ -97,7 +97,7 @@ Detailed description
 
 - **Step 2: [Local]**
 
-  Convert the text(.txt) file to a comma-separated values(.csv) file: 【这个需要跑一会】
+  Convert the text(.txt) file to a comma-separated values(.csv) file
 
   ``` shell
   # python3 txt_to_csv.py + input file + output file(must be csv)
@@ -252,7 +252,11 @@ Detailed description
   Remove those zipcodes that are not in NYC
 
   ``` shell
+  # run script
   $ python3 income_clean.py
+  
+  # upload result to HDFS
+  $ hfs -put datasets_results/income_clean.csv
   ```
 
   
@@ -303,13 +307,13 @@ Detailed description
   $ hfs -getmerge mta_daily_change.out datasets_results/mta_daily_change.csv
   ```
 
-  Draw Graph
+  Draw Graph:
 
-
+  
 
 - **Step 5: [Dumbo Spark]**
 
-  get the monthly mean of MTA data
+  Calculate the monthly mean of MTA data
 
   ```shell
   $ spark-submit --conf spark.pyspark.python=/share/apps/python/3.6.5/bin/python mta_monthly_mean.py /user/js11182/zipcode_daily.csv
@@ -319,10 +323,36 @@ Detailed description
 
 - **Step 6: [Dumbo Spark]**
 
-  get the decreasing rate from 2019/2020 per zipcode
+  Calculate the decreasing rate from 2019/2020 per zipcode
 
   ```shell
-  $ spark-submit --conf spark.pyspark.python=/share/apps/python/3.6.5/bin/python /home/xj710/project/mta_decrease_rate.py /user/xj710/mta_monthly_mean.csv
+  $ spark-submit --conf spark.pyspark.python=/share/apps/python/3.6.5/bin/python mta_decrease_rate.py /user/js11182/mta_monthly_mean.csv
+  ```
+
+  
+
+#### COVID-19 Cases
+
+- **Step 1: [Dumbo Spark]**
+
+  Calculate COVID-19 cases in each area(zipcode) of NYC daily change
+
+  ```shell
+  $ spark-submit --conf spark.pyspark.python=/share/apps/python/3.6.5/bin/python covid19_nyc_cases.py /user/js11182/covid19_clean.csv
+  
+  # download the covid19_nyc_cases.out from HDFS to local path.
+  $ hfs -getmerge covid19_nyc_cases.out datasets_results/covid19_nyc_cases.csv
+  ```
+
+
+
+- **Step2: [Local]**
+
+  ```shell
+  # transfer data to csv
+  # $ python3 txt_to_csv.py datasets_results/covid19_nyc_cases.out datasets/covid19_NYC_cases.csv
+  
+  $ python3 covid19_NYC_daily_change.py datasets/covid19_NYC_cases.csv datasets/covid19_NYC_cases_change.csv
   ```
 
   
@@ -334,8 +364,14 @@ Detailed description
   Join 3 datasets together (MTA data, income data and COVID-19 data)
 
   ```shell
-  
-  
+  $ spark-submit --conf \
+  spark.pyspark.python=/share/apps/python/3.6.5/bin/python \
+  covid19_mta_income_relation.py \
+  /user/js11182/income_clean.csv \
+  /user/js11182/covid19_clean.csv \
+  /user/js11182/mta_decrease_rate.csv
   ```
 
   
+
+## 皓辰的画图数据！！！！
