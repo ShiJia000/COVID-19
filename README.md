@@ -61,22 +61,22 @@ Detailed description
   1. **[Local] ** Remove spaces at the beginning and at the end of the line. Then **merge the several turnstile datasets and save it to one text(.txt) file**: 【这个script执行比较快】
 
      ```shell
-   # python3 merge_files.py + output file
+     # python3 merge_files.py + output file
      python3 turnstile_merge.py datasets_results/turnstile.txt
      ```
   
   2. **[Local]** Convert the text(.txt) file to a comma-separated values(.csv) file: 【这个需要跑一会】
   
-      ```shell
+     ```shell
      # python3 txt_to_csv.py + input file + output file(must be csv)
      python3 txt_to_csv.py datasets_results/turnstile.txt datasets_results/turnstile.csv
        
      # check if all the lines from the input file are saved to the output file
      wc -l datasets_results/turnstile.txt
         14383736 datasets_results/turnstile.txt
-   wc -l datasets_results/turnstile.csv
+     wc -l datasets_results/turnstile.csv
         14383736 datasets_results/turnstile.csv
-      ```
+     ```
   
   3. **[Dumbo Spark]** Detect the issues in turnstile dataset 
   
