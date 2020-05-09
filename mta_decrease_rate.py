@@ -44,6 +44,6 @@ if __name__ == "__main__":
 
     output = output.map(cal_rate)
     output = output.sortByKey()
-    output.map(lambda x: x[0] + ',' + x[1]).saveAsTextFile("decrease_rate_2019_2020.csv")
+    output.map(lambda x: x[0] + ',' + x[1]).saveAsTextFile("mta_decrease_rate.csv")
 
     sc.stop()
