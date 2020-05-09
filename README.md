@@ -69,7 +69,15 @@ Detailed description
 
 - **COVID-19 Cases Data:**
 
+  ``` shell
+  # 'import.sh' comes from https://github.com/remram44/coronavirus-data (author by remram44)
+  git clone https://github.com/nychealth/coronavirus-data
+  sh import.sh > datasets_raw/covid19_zipcode.csv
+  
+  # Because the author of nychealth has deleted the zipcode data you can use the one in github `datasets_raw/covid19_zipcode.csv`
+  ```
 
+  
 
 ## Data Cleaning
 
@@ -226,11 +234,28 @@ Detailed description
 
 - **Step 3: [Dumbo Spark]**
 
-  Check abnormal data in` zipcode_daily.csv`
+  Check abnormal data in `zipcode_daily.csv`
 
   ```shell
   $ spark-submit --conf spark.pyspark.python=/share/apps/python/3.6.5/bin/python zipcode_daily_abmormal_test.py /user/js11182/zipcode_daily.csv
   ```
+
+
+
+- **Step 4: [Dumbo Spark]**
+
+  Calculate the daily change of passenger flow in NYC. (From 02/01/2020 to 04/30/2020)
+
+  ```shell
+  spark-submit --conf spark.pyspark.python=/share/apps/python/3.6.5/bin/python nyc_mta_daily_change.py /user/js11182/zipcode_daily.csv
+  # download the data and draw graph
+  ```
+
+  Draw Graph
+
+  
+
+- 
 
 #### COVID-19 Cases
 

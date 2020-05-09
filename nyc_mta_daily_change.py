@@ -47,4 +47,4 @@ output = daily_num.join(yest_daily_num) \
 		.map(lambda x: (x[0], x[1][0] - x[1][1])) \
 		.sortByKey() \
 		.map(lambda x: x[0] + ',' + str(x[1]))
-output.saveAsTextFile("turnstile_nyc_daily_change.out")
+output.saveAsTextFile("nyc_mta_daily_change.out")
