@@ -105,26 +105,26 @@ Detailed description
      # (The min value is 0000000000. this issue is solved in step 6)
      
      # turnstile_detect_exits_max.out
-   	 # (The max value is "ENTRIES" They are removed in step 4)
-     
+     # (The max value is "ENTRIES" They are removed in step 4)
+  
      # turnstile_detect_exits_min.out
      # (The min value is 0000000000. this issue is solved in step 6)
-     
+  
      # turnstile_distinct_date.out
      # (All the dates are in range except a "DATE" value. This issue is cleaned in step 4)
-     
+  
      # turnstile_distinct_desc.out
      # (There are three values: "DESC", "RECOVR AUD" and "REGULAR". "DESC" is invalid. It is removed in step 4)
-   
+  
      # turnstile_distinct_division.out
      # (There are 7 values: "BMT", "DIVISION", "IND", "IRT", "PTH", "RIT", "SRT". "DIVISION" is invalid. It is removed in step 4)
-     
+  
      # turnstile_distinct_key.out
      # (There are several key collisions because of data recover. This issue was solved in turnstile cleaning step 4)
-     
+  
      # turnstile_distinct_station.out
      # (All the stations are valid except the "STATION" value. It is removed in step 4)
-     
+  
      # turnstile_distinct_time.out
      # (All the time are between 00:00:00 and 23:59:59 except the "TIME" value. It is removed in step 4)
      ```
@@ -153,17 +153,12 @@ Detailed description
      /user/js11182/turnstile_clean.out
      ```
   
-     
   
-  6. 
-  
-  ```shell
-  # upload turnstile.csv to HDFS
-  hfs -put datasets_results/turnstile.csv
-  # 
-  ```
-  
-  
+  6. **[Local]** Calculate the daily data
+
+
+
+
 
 ## Data Analysis
 
