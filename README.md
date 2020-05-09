@@ -70,6 +70,12 @@ Detailed description
     ```shell
     # python3 txt_to_csv.py + input file + output file(must be csv)
     python3 txt_to_csv.py datasets_results/turnstile.txt datasets_results/turnstile.csv
+    
+    # check if all the lines from the input file are saved to the output file
+    wc -l datasets_results/turnstile.txt
+     14383736 datasets_results/turnstile.txt
+    wc -l datasets_results/turnstile.csv
+     14383736 datasets_results/turnstile.csv
     ```
 
   - **[Dumno]** Detect the issues in turnstile dataset 
