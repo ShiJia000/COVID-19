@@ -20,7 +20,7 @@ Detailed description
   
 - **NYC IRS Income by Zipcode:** https://data.world/jonloyens/irs-income-by-zip-code/workspace/file?filename=IRSIncomeByZipCode.csv
 
-  - Data Position: `./datasets_raw/income_by_zipcode.csv`
+  - Data Position: `./datasets_raw/income.csv`
 
   - Data Range: 2013
 
@@ -241,6 +241,18 @@ Detailed description
 
   ```shell
   $ spark-submit --conf spark.pyspark.python=/share/apps/python/3.6.5/bin/python covid19_station_detect.py /user/js11182/covid19_clean.csv /user/js11182/zipcode_station.csv
+  ```
+
+
+
+#### NYC IRS Income Data Cleaning:
+
+- **Step 1: [Local]**
+
+  Remove those zipcodes that are not in NYC
+
+  ``` shell
+  $ python3 income_clean.py
   ```
 
   

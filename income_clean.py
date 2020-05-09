@@ -1,11 +1,11 @@
 import csv
 import pandas as pd
 
-inFile = open("datasets/income_by_zipcode.csv", "r")
+inFile = open("datasets_raw/income.csv", "r")
 reader = csv.reader(inFile)
 
 # new out file
-outFile = open('datasets/income_by_nyc_zipcode.csv','w')
+outFile = open('datasets_results/income_clean.csv','w')
 writer = csv.writer(outFile)
 
 
@@ -36,8 +36,3 @@ for l in reader:
 
 outFile.close()
 inFile.close()
-# df = pd.read_csv("datasets/17zpallagi.csv")
-# print(df.columns.tolist())
-# df = pd.read_csv("datasets/17zpallagi.csv", usecols = ['zipcode', 'agi_stub', 'A02650', 'N02650'])
-# # 
-# df.to_csv('datasets/income_by_nyc_zipcode.csv' , index = False)
