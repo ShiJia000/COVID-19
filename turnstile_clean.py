@@ -57,7 +57,7 @@ check_collision.select(format_string("%s,%s,%s,%s,%s,%s,%s,%s,%s", \
 							check_collision["r.`DESC`"], \
 							check_collision["r.`ENTRIES`"], \
 							check_collision["r.`EXITS`"])) \
-		.write.save("check-collision.out", format="text")
+		.write.save("turnstile_collisions.out", format="text")
 
 # Remove the RECOVR AUD if collision occurs
 res = spark.sql("SELECT r.* FROM res r \
@@ -75,5 +75,5 @@ res.select(format_string("%s,%s,%s,%s,%s,%s,%s,%s,%s", \
 							res["r.`DESC`"], \
 							res["r.`ENTRIES`"], \
 							res["r.`EXITS`"])) \
-		.write.save("turnstile_violation_clean.out", format="text")
+		.write.save("turnstile_clean.out", format="text")
 res.createOrReplaceTempView("res")
