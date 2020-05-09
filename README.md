@@ -58,9 +58,11 @@ Detailed description
   # transfer txt to csv
   $ python3 txt_to_csv.py datasets_raw/turnstile_200502.txt datasets_results/station_raw.csv
   
-  # get the zipcode of each NYC MTA station and save the data to `datasets_raw/`
-  # This dataset was uploaded to github. You can use it directly.
+  # get the zipcode of each NYC MTA station and save the data to `datasets_raw/zipcode_station.csv`
   $ python3 zipcode_transfer.py
+  
+  # upload the zipcode_station.csv to HDFS
+  $ hfs -put datasets_raw/zipcode_station.csv
   ```
 
   
@@ -82,6 +84,8 @@ Detailed description
   $ python3 turnstile_merge.py datasets_results/turnstile.txt
   ```
 
+
+
 - **Step 2: [Local]**
 
   Convert the text(.txt) file to a comma-separated values(.csv) file: 【这个需要跑一会】
@@ -96,6 +100,8 @@ Detailed description
   $ wc -l datasets_results/turnstile.csv
      14383736 datasets_results/turnstile.csv
   ```
+
+
 
 - **Step 3: [Dumbo Spark]**
 
@@ -113,9 +119,7 @@ Detailed description
   
   # run the detection script
   $ spark-submit --conf \
-  spark.pyspark.python=/share/apps/python/3.6.5/bin/python \
-  turnstile_detect.py \
-  /user/js11182/turnstile.csv
+  spark.pyspark.python=/share/apps/python/3.6.5/bin/python turnstile_detect.py /user/js11182/turnstile.csv
   
   # Check all the output files produced by turnstile_detect.py find the collisions in them
   
@@ -150,6 +154,8 @@ Detailed description
   # (All the time are between 00:00:00 and 23:59:59 except the "TIME" value. It is removed in step 4)
   ```
 
+
+
 - **Step 4: [Dumbo Spark]** 
 
   Remove violations in turnstile dataset. 
@@ -160,23 +166,25 @@ Detailed description
 
   ``` shell
   # run the turnstile turnstile_clean.py
-  $ spark-submit --conf \
-  spark.pyspark.python=/share/apps/python/3.6.5/bin/python \
-  turnstile_clean.py \
-  /user/js11182/turnstile.csv
+  $ spark-submit --conf spark.pyspark.python=/share/apps/python/3.6.5/bin/python turnstile_clean.py /user/js11182/turnstile.csv
   ```
 
-- **Step 5: [Dumbo Spark]** Sort the turnstile data, which is the preparation for next step.
+
+
+- **Step 5: [Dumbo Spark]** 
+
+  Sort the turnstile data, which is the preparation for next step.
 
   ``` shell
   # use the data produced from previous step(Step 4) as input file
-  $ spark-submit --conf \
-  spark.pyspark.python=/share/apps/python/3.6.5/bin/python \
-  turnstile_sort.py \
-  /user/js11182/turnstile_clean.out
+  $ spark-submit --conf spark.pyspark.python=/share/apps/python/3.6.5/bin/python turnstile_sort.py /user/js11182/turnstile_clean.out
   ```
 
-- **Step 6: [Local]** Calculate the daily passenger flow for each turnstile from culumative turnstile data.
+
+
+- **Step 6: [Local]** 
+
+  Calculate the daily passenger flow for each turnstile from culumative turnstile data.
 
   ``` shell
   # Download the sorted turnstile dataset to ./datasets_results/.
@@ -201,15 +209,28 @@ Detailed description
 
   ``` shell
   # run the script
-  $ spark-submit --conf \
-  spark.pyspark.python=/share/apps/python/3.6.5/bin/python \
-  station_daily.py \
-  /user/js11182/turnstile_daily.csv
+  $ spark-submit --conf spark.pyspark.python=/share/apps/python/3.6.5/bin/python station_daily.py /user/js11182/turnstile_daily.csv
   ```
+
+
 
 - **Step 2: [Dumbo Spark]** 
 
-  
+  Calculate the daily passenger flow for each zipcode. (Clean the zipcodes that are not in NYC).
+
+  ``` shell
+  $ spark-submit --conf spark.pyspark.python=/share/apps/python/3.6.5/bin/python zipcode_daily.py /user/js11182/zipcode_station.csv /user/js11182/station_daily.csv
+  ```
+
+
+
+- **Step 3: [Dumbo Spark]**
+
+  Check abnormal data in` zipcode_daily.csv`
+
+  ```shell
+  $ spark-submit --conf spark.pyspark.python=/share/apps/python/3.6.5/bin/python zipcode_daily_abmormal_test.py /user/js11182/zipcode_daily.csv
+  ```
 
 #### COVID-19 Cases
 

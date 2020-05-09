@@ -1,5 +1,3 @@
-from __future__ import print_function
-
 import sys
 from pyspark import SparkContext
 from csv import reader
@@ -55,6 +53,6 @@ if __name__ == "__main__":
     output = output.reduceByKey(reduce_add)
     output = output.sortByKey()
     output = output.map(lambda x: ','.join(x[0]) + ',' + ','.join(x[1]))
-    output = output.saveAsTextFile("station_join_zipcode_output.csv")
+    output = output.saveAsTextFile("zipcode_daily.csv")
 
     sc.stop()
