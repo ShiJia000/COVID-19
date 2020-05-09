@@ -78,7 +78,7 @@ Detailed description
         14383736 datasets_results/turnstile.csv
     ```
   
-  3. **[Dumbo]** Detect the issues in turnstile dataset 
+  3. **[Dumbo Spark]** Detect the issues in turnstile dataset 
   
    - Find data outliers
      - Find range of each field
@@ -105,45 +105,57 @@ Detailed description
      # (The min value is 0000000000. this issue is solved in step 6)
      
      # turnstile_detect_exits_max.out
-   # (The max value is "ENTRIES" They are removed in step 4)
+   	 # (The max value is "ENTRIES" They are removed in step 4)
      
-   # turnstile_detect_exits_min.out
+     # turnstile_detect_exits_min.out
      # (The min value is 0000000000. this issue is solved in step 6)
      
      # turnstile_distinct_date.out
-   # (All the dates are in range except a "DATE" value. This issue is cleaned in step 4)
+     # (All the dates are in range except a "DATE" value. This issue is cleaned in step 4)
      
      # turnstile_distinct_desc.out
      # (There are three values: "DESC", "RECOVR AUD" and "REGULAR". "DESC" is invalid. It is removed in step 4)
    
      # turnstile_distinct_division.out
-   # (There are 7 values: "BMT", "DIVISION", "IND", "IRT", "PTH", "RIT", "SRT". "DIVISION" is invalid. It is removed in step 4)
+     # (There are 7 values: "BMT", "DIVISION", "IND", "IRT", "PTH", "RIT", "SRT". "DIVISION" is invalid. It is removed in step 4)
      
-   # turnstile_distinct_key.out
+     # turnstile_distinct_key.out
      # (There are several key collisions because of data recover. This issue was solved in turnstile cleaning step 4)
      
      # turnstile_distinct_station.out
      # (All the stations are valid except the "STATION" value. It is removed in step 4)
      
-   # turnstile_distinct_time.out
+     # turnstile_distinct_time.out
      # (All the time are between 00:00:00 and 23:59:59 except the "TIME" value. It is removed in step 4)
      ```
   
-  4. **[Dumbo]** Remove violations in turnstile dataset. 
+  4. **[Dumbo Spark]** Remove violations in turnstile dataset. 
   
      - Remove useless columns
      - Remove key collision
      - Remove table title
   
      ``` shell
-     
+     # run the turnstile turnstile_clean.py
+     spark-submit --conf \
+     spark.pyspark.python=/share/apps/python/3.6.5/bin/python \
+     turnstile_clean.py \
+     /user/js11182/turnstile.csv
+     ```
+  
+  5. **[Dumbo Spark]** Sort the turnstile data, which is the preparation for Step 6 to calculate the daily passenger flow for each turnstile.
+  
+     ``` shell
+     # use the data produced from previous step(Step 4) as input file
+     spark-submit --conf \
+     spark.pyspark.python=/share/apps/python/3.6.5/bin/python \
+     turnstile_sort.py \
+     /user/js11182/turnstile_clean.out
      ```
   
      
   
-  
-  
-  5. **[Dumbo]** Sort the 
+  6. 
   
   ```shell
   # upload turnstile.csv to HDFS
