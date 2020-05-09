@@ -15,10 +15,9 @@ Detailed description
   - Fields Description: http://web.mta.info/developers/resources/nyct/turnstile/ts_Field_Description.txt
 
 - **NYC turnstile zipcode:**
-
-  - Data fetch: run transfer script and save it to `./datasets_raw/`(will talk about it in the following **Fetch Data** part)
+- Data fetch: run transfer script and save it to `./datasets_raw/`(will talk about it in the following **Fetch Data** part)
   - Field Description:
-
+  
 - **NYC IRS Income by Zipcode:** https://data.world/jonloyens/irs-income-by-zip-code/workspace/file?filename=IRSIncomeByZipCode.csv
 
   - Data Position: `./datasets_raw/income_by_zipcode.csv`
@@ -50,6 +49,19 @@ Detailed description
 ## Fetch Datasets
 
 - **NYC turnstile zipcode:**
+
+  - install googlemaps module
+
+    ```
+    $ pip install -U googlemaps
+    ```
+
+    get the relationship between station and zipcode
+
+    ```
+    $ python transfer_zipcode.py
+    ```
+
 - **COVID-19 Cases Data:**
 
 
@@ -143,7 +155,7 @@ Detailed description
      /user/js11182/turnstile.csv
      ```
   
-  5. **[Dumbo Spark]** Sort the turnstile data, which is the preparation for Step 6 to calculate the daily passenger flow for each turnstile.
+  5. **[Dumbo Spark]** Sort the turnstile data, which is the preparation for next step.
   
      ``` shell
      # use the data produced from previous step(Step 4) as input file
@@ -154,11 +166,19 @@ Detailed description
      ```
   
   
-  6. **[Local]** Calculate the daily data
+  6. **[Local]** Calculate the daily passenger flow for each turnstile from culumative turnstile data.
+  
+     ``` shell
+     # Download the sorted turnstile dataset to ./datasets_results/.
+     hfs -getmerge turnstile_sorted.out ./datasets_results/turnstile_sorted.csv
+     
+     # Run the script to transfer the culumative data to daily data.
+     python3 turnstile_daily.py
+     ```
+  
+  7. 
 
-
-
-
+- 
 
 ## Data Analysis
 

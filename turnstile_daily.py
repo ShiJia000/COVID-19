@@ -1,12 +1,12 @@
 import csv
 import datetime
 
-inFile = open("datasets/turnstile_sorted.out", "r")
+inFile = open("datasets_results/turnstile_sorted.csv", "r")
 # inFile = open("a.csv", "r")
 reader = csv.reader(inFile)
 
 # new out file
-outFile = open('datasets/turnstile_daily.csv','w')
+outFile = open('datasets_results/turnstile_daily.csv','w')
 writer = csv.writer(outFile)
 
 # threahold
@@ -24,10 +24,12 @@ yest_daily_num = [0, 0]
 
 last_l = []
 
+print("Running...")
+
 for l in reader:
 	l_turnstile = [l[0], l[1], l[2], l[3]]
 	l_date = l[4]
-	l_num = [int(l[7]), int(l[8])]
+	l_num = [int(l[6]), int(l[7])]
 
 	# convert date to timestamp
 	l_dt = datetime.datetime.strptime(l_date, "%Y-%m-%d")
@@ -119,6 +121,9 @@ for l in reader:
 		date = "2018-12-29"
 		num = ["", ""]
 		yesterday_daily = [0, 0]
+		print(".")
+
+print("Done.")
 
 inFile.close()
 outFile.close()
