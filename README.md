@@ -61,7 +61,7 @@ Detailed description
   # get the zipcode of each NYC MTA station and save the data to `datasets_raw/zipcode_station.csv`
   $ python3 zipcode_transfer.py
   
-  # upload the zipcode_station.csv to HDFS
+  # upload the zipcode_station.csv to HDFS /user/js11182/zipcode_station.csv
   $ hfs -put datasets_raw/zipcode_station.csv
   ```
 
@@ -71,10 +71,11 @@ Detailed description
 
   ``` shell
   # 'import.sh' comes from https://github.com/remram44/coronavirus-data (author by remram44)
-  git clone https://github.com/nychealth/coronavirus-data
-  sh import.sh > datasets_raw/covid19_zipcode.csv
+  $ git clone https://github.com/nychealth/coronavirus-data
+  $ sh import.sh > datasets_raw/covid19_zipcode.csv
   
-  # Because the author of nychealth has deleted the zipcode data you can use the one in github `datasets_raw/covid19_zipcode.csv`
+  # Because the author of nychealth has deleted the zipcode data you can use the one in github `datasets_raw/covid19_zipcode.csv` or on HDFS /user/js11182/covid19_zipcode.csv
+  $ hfs -put datasets_raw/covid19_zipcode.csv
   ```
 
   
@@ -203,6 +204,43 @@ Detailed description
   
   # upload the cleaned turnstile_daily.csv data to HDFS.
   $ hfs -put datasets_results/turnstile_daily.csv
+  ```
+
+
+
+
+#### COVID-19 Cases cleaning:
+
+- **Step 1: [Dumbo Spark]**
+
+  Detect data issues of COVID-19
+
+  ```shell
+  $ spark-submit --conf spark.pyspark.python=/share/apps/python/3.6.5/bin/python covid19_detect.py /user/js11182/covid19_zipcode.csv
+  ```
+
+
+
+- **Step 2: [Local]**
+
+  Clean the COVID-19 to solve the previous issues
+
+  ```shell
+  # run script
+  $ python3 covid19_clean.py covid19_zipcode.csv covid19_clean.csv
+  
+  # upload to HDFS (/user/js11182/covid19_clean.csv)
+  $ hfs -put datasets_results/covid19_clean.csv
+  ```
+
+
+
+- **Step 3: [Dumbo Spark]**
+
+  Detect if the covid19 zipcodes and turnstile zipcode are in same range
+
+  ```shell
+  $ spark-submit --conf spark.pyspark.python=/share/apps/python/3.6.5/bin/python covid19_station_detect.py /user/js11182/covid19_clean.csv /user/js11182/zipcode_station.csv
   ```
 
   

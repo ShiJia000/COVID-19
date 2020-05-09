@@ -1,3 +1,5 @@
+# Detect if the covid19 zipcodes and turnstile zipcode are in same range
+
 import sys
 from pyspark.sql import SparkSession
 from pyspark.sql.functions import *

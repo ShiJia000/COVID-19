@@ -5,10 +5,12 @@ import sys
 import os
 
 
-path = 'datasets/'
+path = 'datasets_raw/'
+
+out_path = 'datasets_results/'
 
 im_path = os.path.join(path, sys.argv[1])
-out_path = os.path.join(path, sys.argv[2])
+out_path = os.path.join(out_path, sys.argv[2])
 
 with open(out_path,'w') as outfile:
 	with open(im_path) as infile:
