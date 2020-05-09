@@ -63,7 +63,7 @@ Detailed description
      ```shell
    # python3 merge_files.py + output file
      python3 turnstile_merge.py datasets_results/turnstile.txt
-   ```
+     ```
   
   2. **[Local]** Convert the text(.txt) file to a comma-separated values(.csv) file: 【这个需要跑一会】
   
@@ -76,7 +76,7 @@ Detailed description
         14383736 datasets_results/turnstile.txt
    wc -l datasets_results/turnstile.csv
         14383736 datasets_results/turnstile.csv
-    ```
+     ```
   
   3. **[Dumbo Spark]** Detect the issues in turnstile dataset 
   
