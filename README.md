@@ -1,6 +1,8 @@
 # COVID-19
 
-[Report](https://docs.google.com/document/d/1gsvIYmaM1iovYlL8E0QqCpkHNREKnFUTYQeUM-03q9A/edit#heading=h.nj23sjpj5u97)
+[Our report](https://github.com/ShiJia000/COVID-19/blob/master/Final_Report.pdf)
+
+[Our presentation](https://github.com/ShiJia000/COVID-19/blob/master/presentation.pdf)
 
 ## Datasets([dataset_used.csv](https://github.com/ShiJia000/COVID-19/blob/master/datasets-used.csv))
 
