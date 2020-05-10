@@ -2,7 +2,7 @@
 
 [Our report](https://github.com/ShiJia000/COVID-19/blob/master/Final_Report.pdf)
 
-[Our presentation](https://github.com/ShiJia000/COVID-19/blob/master/presentation.pdf)
+[Our presentation slides](https://github.com/ShiJia000/COVID-19/blob/master/presentation.pdf)
 
 ## Datasets([dataset_used.csv](https://github.com/ShiJia000/COVID-19/blob/master/datasets-used.csv))
 
