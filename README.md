@@ -5,11 +5,11 @@
 ## Datasets
 
 - **NYC MTA turnstile:** http://web.mta.info/developers/turnstile.html 
-- Data Position: `./datasets_raw/turnstile_*.csv`
+  - Data Position: `./datasets_raw/turnstile_*.csv`
   
-- Data Range: 12/29/2018 - 05/02/2020
+  - Data Range: 12/29/2018 - 05/02/2020
   
-- Fields Description: http://web.mta.info/developers/resources/nyct/turnstile/ts_Field_Description.txt
+  - Fields Description: http://web.mta.info/developers/resources/nyct/turnstile/ts_Field_Description.txt
   
 - **NYC turnstile zipcode:**
   - Data fetch: run transfer script and save it to `./datasets_raw/`(will talk about it in the following Fetch Data part)
