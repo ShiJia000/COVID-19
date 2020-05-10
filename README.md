@@ -1,3 +1,7 @@
+---
+typora-copy-images-to: ../Screen Shot 2020-05-09 at 8.15.29 PM.png
+---
+
 # COVID-19
 
 Detailed description 
@@ -225,6 +229,8 @@ Detailed description
 
   Clean the COVID-19 to solve the previous issues
 
+  > covid19_clean.csv is used to draw the map of COVID-19
+
   ```shell
   # run script
   $ python3 covid19_clean.py covid19_zipcode.csv covid19_clean.csv
@@ -300,14 +306,14 @@ Detailed description
 
   Calculate the daily change of passenger flow in NYC. (From 02/01/2020 to 04/30/2020)
 
+  > mta_daily_change.csv is used to draw the daily change of MTA chart
+
   ```shell
   $ spark-submit --conf spark.pyspark.python=/share/apps/python/3.6.5/bin/python mta_daily_change.py /user/js11182/zipcode_daily.csv
   
   # download the data and draw graph
   $ hfs -getmerge mta_daily_change.out datasets_results/mta_daily_change.csv
   ```
-
-  Draw Graph:
 
   
 
@@ -348,11 +354,13 @@ Detailed description
 
 - **Step2: [Local]**
 
+  Calculate the daily change data of COVID-19 cases
+
+  > covid19_nyc_cases_change.csv is used to draw the NYC COVID-19 Positve Rate chart.
+
   ```shell
-  # transfer data to csv
-  # $ python3 txt_to_csv.py datasets_results/covid19_nyc_cases.out datasets/covid19_NYC_cases.csv
-  
-  $ python3 covid19_NYC_daily_change.py datasets/covid19_NYC_cases.csv datasets/covid19_NYC_cases_change.csv
+  # run script
+  $ python3 covid19_nyc_daily_change.py datasets_results/covid19_nyc_cases.csv datasets/covid19_nyc_cases_change.csv
   ```
 
   
@@ -363,6 +371,12 @@ Detailed description
 
   Join 3 datasets together (MTA data, income data and COVID-19 data)
 
+  > covid19_mta_income_relation.csv is used to draw the following charts:
+  >
+  > - Average Income and MTA Decrease RATE
+  > - Average Income and Positive Cases
+  > - MTA Decrease Rate and Positive Cases
+
   ```shell
   $ spark-submit --conf \
   spark.pyspark.python=/share/apps/python/3.6.5/bin/python \
@@ -372,6 +386,3 @@ Detailed description
   /user/js11182/mta_decrease_rate.csv
   ```
 
-  
-
-## 皓辰的画图数据！！！！
