@@ -1,40 +1,25 @@
----
-typora-copy-images-to: ../Screen Shot 2020-05-09 at 8.15.29 PM.png
----
-
 # COVID-19
-
-Detailed description 
 
 
 
 ## Datasets
 
 - **NYC MTA turnstile:** http://web.mta.info/developers/turnstile.html 
-
-  - Data Position: `./datasets_raw/turnstile_*.csv`
-
-  - Data Range: 12/29/2018 - 05/02/2020
-
-  - Fields Description: http://web.mta.info/developers/resources/nyct/turnstile/ts_Field_Description.txt
-
-- **NYC turnstile zipcode:**
-- Data fetch: run transfer script and save it to `./datasets_raw/`(will talk about it in the following **Fetch Data** part)
-  - Field Description:
+- Data Position: `./datasets_raw/turnstile_*.csv`
   
+- Data Range: 12/29/2018 - 05/02/2020
+  
+- Fields Description: http://web.mta.info/developers/resources/nyct/turnstile/ts_Field_Description.txt
+  
+- **NYC turnstile zipcode:**
+  - Data fetch: run transfer script and save it to `./datasets_raw/`(will talk about it in the following **Fetch Data** part)
 - **NYC IRS Income by Zipcode:** https://data.world/jonloyens/irs-income-by-zip-code/workspace/file?filename=IRSIncomeByZipCode.csv
-
-  - Data Position: `./datasets_raw/income.csv`
-
-  - Data Range: 2013
-
-  - Fields Description: 
-
+- Data Position: `./datasets_raw/income.csv`
+- Data Range: 2013
 - **COVID-19 Cases Data:** https://github.com/nytimes/covid-19-data
 
   - Data fetch: run **shell** and save it to `./datasets_raw/` (will talk about it in the following **Fetch Data** part)
-  - Data Range: 04/01/2020 - Now
-  - Fields Description: 
+  - Data Range: 04/01/2020 - 05/01/2020
 
 
 
@@ -49,6 +34,8 @@ Detailed description
   - Python 3.6.5 [`module load python/gnu/3.6.5`]
 
 - Running path: `COVID-19/`
+
+
 
 ## Fetch Datasets
 
@@ -88,7 +75,7 @@ Detailed description
 
 #### NYC MTA turnstile cleaning:
 
-- **Step 1: [Local] ** 
+- **Step 1: [Local]** 
 
   Remove spaces at the beginning and at the end of the line. Then merge the several turnstile datasets and save it to one text(.txt) file
 
