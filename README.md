@@ -12,10 +12,10 @@
 - Fields Description: http://web.mta.info/developers/resources/nyct/turnstile/ts_Field_Description.txt
   
 - **NYC turnstile zipcode:**
-  - Data fetch: run transfer script and save it to `./datasets_raw/`(will talk about it in the following **Fetch Data** part)
+  - Data fetch: run transfer script and save it to `./datasets_raw/`(will talk about it in the following Fetch Data part)
 - **NYC IRS Income by Zipcode:** https://data.world/jonloyens/irs-income-by-zip-code/workspace/file?filename=IRSIncomeByZipCode.csv
-- Data Position: `./datasets_raw/income.csv`
-- Data Range: 2013
+  - Data Position: `./datasets_raw/income.csv`
+  - Data Range: 2013
 - **COVID-19 Cases Data:** https://github.com/nytimes/covid-19-data
 
   - Data fetch: run **shell** and save it to `./datasets_raw/` (will talk about it in the following **Fetch Data** part)
