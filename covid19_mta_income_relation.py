@@ -20,6 +20,6 @@ mta_data = mta.map(lambda x: (int(x[0]), x[1]))
 income_positive_mta = positive_data.join(income_data).join(mta_data)
 
 # zipcode, positive case, income, decrease rate
-output = income_positive_mta.map(lambda x: str(x[0]) + ',' + str(x[1][0][0]) + ',' + str(x[1][0][0]) + ',' + str(x[1][1]))
+output = income_positive_mta.map(lambda x: str(x[0]) + ',' + str(x[1][0][0]) + ',' + str(x[1][0][1]) + ',' + str(x[1][1]))
 
 output.saveAsTextFile("covid19_mta_income_relation.out")
