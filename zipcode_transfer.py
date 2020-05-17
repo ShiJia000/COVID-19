@@ -16,7 +16,7 @@ stations = df['STATION'].unique()
 
 print("Get zipcode from Google API by station...")
 
-ny_stations = list(map(lambda x: x + ', New York, NY', stations))
+ny_stations = list(map(lambda x: x + ' Station, New York, NY', stations))
 unique_geocodes = defaultdict(str)
 
 download = True
@@ -37,7 +37,7 @@ if parse == True:
             address = unique_geocodes[geocode][0]['address_components']
             if address[len(address) - 1]['types'] == ['postal_code']:
                 zipcodes.append(address[len(address)- 1]['long_name'])
-                stations.append(geocode.split(',')[0])
+                stations.append(geocode.split(',')[0][:-8])
         except:
             print('Unable to find location data')
         
